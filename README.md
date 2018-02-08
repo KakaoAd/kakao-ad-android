@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.kakao.ad:tracker:0.2.3@aar'
+    implementation 'com.kakao.ad:tracker:0.2.4@aar'
 }
 ```
 
