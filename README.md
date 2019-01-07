@@ -27,9 +27,9 @@ Track ID 발급이 완료된 후, 다음 단계의 안내에 따라 Kakao SDK를
 
 ### 2.2. 라이브러리 추가 (Android Studio 기준)
 `build.gradle` 파일에 아래 내용을 추가합니다.
-```
+```gradle
 repositories { 
-        maven{ url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/'}
+    maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
 }
 
 dependencies {
@@ -54,25 +54,37 @@ Google Play Store에 App을 개시하는 경우, App 내에 광고가 있다면 
 
 이에 따라, **<span style="color:red">SDK에서 Google Play Service SDK가 없이는 라이브러리를 사용할 수 없도록 변경</span>되었습니다.**
 
-#### 2.4.1. Android Studio(Gradle)에서 설정하기
+#### 2.4.1. Google Play Service SDK 설정 추가하기
 
-Gradle로 App을 빌드하실 경우, build.gradle을 다음과 같이 수정합니다.
+Google Play Services SDK를 사용하기 위해, build.gradle을 다음과 같이 합니다.
 
-```
-apply plugin: 'com.android.application'
-...
+1. 먼저 최상위 `build.gradle` 파일에 Google's Maven repository를 추가합니다.  
+```gradle
+allprojects {
+    repositories {
+        google()
 
-dependencies {
-    compile 'com.google.android.gms:play-services-base:+'
-    compile 'com.google.android.gms:play-services-ads:+'
+        // 사용 중인 Gradle 버전이 4.1보다 낮은 경우, 다음과 같이 대신 설정합니다.
+        //
+        // maven {
+        //     url 'https://maven.google.com'
+        // }
+    }
 }
 ```
 
-그 다음 Sync Project with Gradle Files를 눌러서 프로젝트를 업데이트 합니다.
+2. App 모듈의 dependencies 블럭에 최신 버전의 `play-services` 라이브러리를 추가합니다.  
+```gradle
+dependencies {
+    implementation 'com.google.android.gms:play-services-base:+'
+    implementation 'com.google.android.gms:play-services-ads:+'
+}
+```
 
-위 내용은 TrackerSample 프로젝트에 적용되어 있으니 참고하기 바랍니다.
+3. 설정 후, 툴바의 **Sync Project with Gradle Files**를 눌러 변경사항을 반영합니다.
 
-또한, Google Play Service SDK와 관련해 보다 자세한 사항은 [Setting Up Google Play Services](https://developers.google.com/android/guides/setup) 링크를 참고하기 바랍니다.
+위 내용은 TrackerSample 프로젝트에 적용되어 있으니 참고 부탁드리며,   
+Google Play Service SDK에 대한 자세한 사항은 [Setting Up Google Play Services 링크](https://developers.google.com/android/guides/setup)를 참고 부탁드립니다.
 
 ## 3. 이벤트 트래킹 사용 가이드
 다양한 이벤트를 트래킹을 제공합니다. 이벤트의 종류에 따라 자동으로 트래킹이 되는 것이 있고, 명시적으로 이벤트 트래킹을 해야하는 이벤트가 있습니다.
