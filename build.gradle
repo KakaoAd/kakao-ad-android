@@ -1,0 +1,28 @@
+buildscript {
+    ext.kakaoad_tracker_version = '0.3.0' // 최신 버전 사용을 권장합니다.
+
+    ext.kotlin_version = '1.3.21' // 최신 버전 사용을 권장합니다.
+    ext.play_service_version = '16.0.0' // 최신 버전 사용을 권장합니다.
+
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

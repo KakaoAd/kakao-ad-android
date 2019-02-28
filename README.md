@@ -18,7 +18,7 @@
 * `tracker-sample/src/com/kakao/ad/tracker/sample` : 샘플 프로젝트
 
 ### 2.1. 트랙 ID(Track ID) 발급받기
-카카오계정에서는 카카오SDK에서 사용하기 위한 고유한 식별값(Track Id)을 발급할 수 있습니다. 
+카카오계정에서는 카카오SDK에서 사용하기 위한 고유한 식별값(Track Id)을 발급할 수 있습니다.
 이벤트 수집 SDK를 이용하기 위해서는, 먼저 고유한 식별값이 필요합니다. <br>
 [https://moment.kakao.com](https://moment.kakao.com/login) 에서 회원 가입 후, <br>
 [https://moment.kakao.com/mypixel](https://moment.kakao.com/mypixel) 페이지에서 Track ID 발급 단계를 진행할 수 있습니다.
@@ -28,7 +28,7 @@ Track ID 발급이 완료된 후, 다음 단계의 안내에 따라 Kakao SDK를
 ### 2.2. 라이브러리 추가 (Android Studio 기준)
 `build.gradle` 파일에 아래 내용을 추가합니다.
 ```gradle
-repositories { 
+repositories {
     maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
 }
 
@@ -58,7 +58,7 @@ Google Play Store에 App을 개시하는 경우, App 내에 광고가 있다면 
 
 Google Play Services SDK를 사용하기 위해, build.gradle을 다음과 같이 합니다.
 
-1. 먼저 최상위 `build.gradle` 파일에 Google's Maven repository를 추가합니다.  
+1. 먼저 최상위 `build.gradle` 파일에 Google's Maven repository를 추가합니다.
 ```gradle
 allprojects {
     repositories {
@@ -73,7 +73,7 @@ allprojects {
 }
 ```
 
-2. App 모듈의 dependencies 블럭에 최신 버전의 `play-services` 라이브러리를 추가합니다.  
+2. App 모듈의 dependencies 블럭에 최신 버전의 `play-services` 라이브러리를 추가합니다.
 ```gradle
 dependencies {
     implementation 'com.google.android.gms:play-services-base:+'
@@ -83,7 +83,7 @@ dependencies {
 
 3. 설정 후, 툴바의 **Sync Project with Gradle Files**를 눌러 변경사항을 반영합니다.
 
-위 내용은 TrackerSample 프로젝트에 적용되어 있으니 참고 부탁드리며,   
+위 내용은 TrackerSample 프로젝트에 적용되어 있으니 참고 부탁드리며,
 Google Play Service SDK에 대한 자세한 사항은 [Setting Up Google Play Services 링크](https://developers.google.com/android/guides/setup)를 참고 부탁드립니다.
 
 ## 3. 이벤트 트래킹 사용 가이드
@@ -113,7 +113,7 @@ KakaoAdTracker.getInstance().init(this, "track_id");
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="your.app.package.namespace">
     <application>
-            
+
         <!-- Application Tag 하위에 아래 내용을 추가한다 -->
         <receiver
             android:name="com.kakao.ad.tracker.KakaoAdInstallReferrerReceiver"
@@ -132,7 +132,7 @@ KakaoAdTracker.getInstance().init(this, "track_id");
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="your.app.package.namespace">
     <application>
-            
+
         <!-- Application Tag 하위에 아래 내용을 추가한다 -->
         <receiver
             android:name="com.kakao.ad.tracker.KakaoAdInstallReferrerReceiver"
@@ -141,12 +141,12 @@ KakaoAdTracker.getInstance().init(this, "track_id");
                 <action android:name="com.android.vending.INSTALL_REFERRER">
                 </action>
             </intent-filter>
-            
-            <!-- 
-                이벤트를 다른 Receiver에 전달하고 싶은 경우, 해당 Receiver의 Class를 value에 적어준다 
-                
-                예) Tune의 com.tune.TuneTracker에 INSTALL_REFERRER 액션을 전달하고 싶은 경우, 
-                   아래와 같이 meta-data를 추가하면 된다. 
+
+            <!--
+                이벤트를 다른 Receiver에 전달하고 싶은 경우, 해당 Receiver의 Class를 value에 적어준다
+
+                예) Tune의 com.tune.TuneTracker에 INSTALL_REFERRER 액션을 전달하고 싶은 경우,
+                   아래와 같이 meta-data를 추가하면 된다.
             -->
             <meta-data android:name="tuneTracker" android:value="com.tune.TuneTracker"></meta-data>
         </receiver>
