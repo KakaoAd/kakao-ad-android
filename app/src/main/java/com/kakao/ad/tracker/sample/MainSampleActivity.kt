@@ -1,9 +1,11 @@
 package com.kakao.ad.tracker.sample
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.kakao.ad.common.json.*
 import com.kakao.ad.tracker.KakaoAdTracker
+import com.kakao.ad.tracker.sample.util.logAndToast
 import com.kakao.ad.tracker.send
 import kotlinx.android.synthetic.main.activity_main_sample.*
 import java.util.*
@@ -31,6 +33,12 @@ class MainSampleActivity : AppCompatActivity() {
         sendViewCartEventButton.setOnClickListener { sendViewCartEvent() }
         sendPurchaseEventButton.setOnClickListener { sendPurchaseEvent() }
         sendInAppPurchaseEventButton.setOnClickListener { sendInAppPurchaseEvent() }
+        startInAppBillingLibTestButton.setOnClickListener {
+            startActivity(Intent(it.context, BillingLibTestActivity::class.java))
+        }
+        startInAppBillingAidlTestButton.setOnClickListener {
+            startActivity(Intent(it.context, BillingAidlTestActivity::class.java))
+        }
     }
 
     /**

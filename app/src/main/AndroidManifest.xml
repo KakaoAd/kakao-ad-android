@@ -26,6 +26,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".BillingLibTestActivity" />
+
+        <activity android:name=".BillingAidlTestActivity" />
+
         <!-- "com.android.vending.INSTALL_REFERRER" 수신을 위한 BroadcastReceiver 추가 -->
         <!-- "KakaoAdInstallReferrerReceiver"를 BroadcastReceiver 중 가장 먼저 추가!!! -->
         <receiver

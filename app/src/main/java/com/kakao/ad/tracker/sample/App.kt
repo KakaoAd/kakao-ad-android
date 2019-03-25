@@ -2,6 +2,7 @@ package com.kakao.ad.tracker.sample
 
 import android.app.Application
 import com.kakao.ad.tracker.KakaoAdTracker
+import com.kakao.ad.tracker.sample.util.logv
 
 class App : Application() {
 

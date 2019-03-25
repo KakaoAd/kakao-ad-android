@@ -3,6 +3,7 @@ package com.kakao.ad.tracker.sample
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import com.kakao.ad.tracker.sample.util.logv
 
 class InstallReferrerReceiver1 : BroadcastReceiver() {
 
