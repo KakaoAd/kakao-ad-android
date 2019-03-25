@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.android.billingclient.api.BillingClient.SkuType
+import com.kakao.ad.tracker.KakaoAdTracker
 import com.kakao.ad.tracker.sample.util.BillingServiceHelper
 import com.kakao.ad.tracker.sample.util.logAndToast
 import com.kakao.ad.tracker.sample.util.loge
@@ -20,6 +21,10 @@ class BillingAidlTestActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (!KakaoAdTracker.isInitialized) {
+            KakaoAdTracker.init(this, getString(R.string.kakao_ad_track_id))
+        }
 
         setContentView(R.layout.activity_billing_sample)
 
@@ -104,6 +109,8 @@ class BillingAidlTestActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == REQUEST_CODE_BILLING && data != null) {
+            KakaoAdTracker.sendInAppBillingResult(data)
+
             val skuId =
                 try {
                     JSONObject(data.getStringExtra("INAPP_PURCHASE_DATA"))

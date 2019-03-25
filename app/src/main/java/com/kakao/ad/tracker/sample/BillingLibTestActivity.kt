@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClient.BillingResponse
 import com.android.billingclient.api.BillingClient.SkuType
+import com.kakao.ad.tracker.KakaoAdTracker
 import com.kakao.ad.tracker.sample.util.*
 
 class BillingLibTestActivity : AppCompatActivity() {
@@ -15,12 +16,18 @@ class BillingLibTestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (!KakaoAdTracker.isInitialized) {
+            KakaoAdTracker.init(this, getString(R.string.kakao_ad_track_id))
+        }
+
         client =
             BillingClient.newBuilder(this)
                 .setListener { responseCode, purchases ->
                     logv("Purchases updated :: responseCode = $responseCode, list = $purchases")
                     if (responseCode == BillingResponse.OK && purchases != null) {
                         purchases.forEach { purchase ->
+                            KakaoAdTracker.sendInAppPurchaseData(purchase.originalJson)
+
                             logAndToast("\"${purchase.sku}\" billing flow finished")
                         }
                     }
