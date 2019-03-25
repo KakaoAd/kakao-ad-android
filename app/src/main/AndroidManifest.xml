@@ -13,6 +13,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
+        <!-- Track ID 정보 추가 -->
+        <meta-data
+            android:name="com.kakao.ad.tracker.TRACK_ID"
+            android:value="@string/kakao_ad_track_id" />
+
         <activity android:name=".MainSampleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
