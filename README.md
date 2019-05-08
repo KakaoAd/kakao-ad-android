@@ -53,7 +53,7 @@ Kakao AD SDK를 초기화 하기 위한 정보를 설정하는 방법은 다음�
     <string name="kakao_ad_track_id" translatable="false">Input Your Track ID</string>
     ```
 2. [`AndroidManifest.xml`](app/src/main/AndroidManifest.xml) 파일 `<application>` 태그 하위에 `<meta-data>`를 추가합니다.<br/>
-`<meta-data>`의 `name`은 `com.kakao.ad.tracker.TRACK_ID`를 사용하고, `value`는 위에서 추가한 리스소 정보를 사용합니다.
+`<meta-data>`의 `name`은 `com.kakao.ad.tracker.TRACK_ID`를 사용하고, `value`는 위에서 추가한 리소스 정보를 사용합니다.
 
     ```xml
     <application>
