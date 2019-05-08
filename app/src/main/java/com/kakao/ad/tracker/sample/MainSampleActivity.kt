@@ -3,12 +3,28 @@ package com.kakao.ad.tracker.sample
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.kakao.ad.common.json.*
+import com.kakao.ad.common.json.CompleteRegistration
+import com.kakao.ad.common.json.InAppPurchase
+import com.kakao.ad.common.json.PageView
+import com.kakao.ad.common.json.Product
+import com.kakao.ad.common.json.Purchase
+import com.kakao.ad.common.json.Search
+import com.kakao.ad.common.json.ViewCart
+import com.kakao.ad.common.json.ViewContent
 import com.kakao.ad.tracker.KakaoAdTracker
 import com.kakao.ad.tracker.sample.util.logAndToast
 import com.kakao.ad.tracker.send
-import kotlinx.android.synthetic.main.activity_main_sample.*
-import java.util.*
+import kotlinx.android.synthetic.main.activity_main_sample.sendCompleteRegistrationEventButton
+import kotlinx.android.synthetic.main.activity_main_sample.sendInAppPurchaseEventButton
+import kotlinx.android.synthetic.main.activity_main_sample.sendPageViewEventButton
+import kotlinx.android.synthetic.main.activity_main_sample.sendPurchaseEventButton
+import kotlinx.android.synthetic.main.activity_main_sample.sendSearchEventButton
+import kotlinx.android.synthetic.main.activity_main_sample.sendViewCartEventButton
+import kotlinx.android.synthetic.main.activity_main_sample.sendViewContentEventButton
+import kotlinx.android.synthetic.main.activity_main_sample.startInAppBillingAidlTestButton
+import kotlinx.android.synthetic.main.activity_main_sample.startInAppBillingLibTestButton
+import java.util.Currency
+import java.util.Locale
 
 class MainSampleActivity : AppCompatActivity() {
 
@@ -94,17 +110,17 @@ class MainSampleActivity : AppCompatActivity() {
     fun sendPurchaseEvent() {
         val event = Purchase()
         event.tag = "Tag" // 분류
-        event.products =  // 구매 상품 목록
+        event.products = // 구매 상품 목록
             listOf(
                 Product().also { product ->
-                    product.name = "Product 1"  // 상품명
-                    product.quantity = 1        // 개수
-                    product.price = 1.1         // 금액
+                    product.name = "Product 1" // 상품명
+                    product.quantity = 1 // 개수
+                    product.price = 1.1 // 금액
                 },
                 Product().also { product ->
-                    product.name = "Product 2"  // 상품명
-                    product.quantity = 2        // 개수
-                    product.price = 2.2         // 금액
+                    product.name = "Product 2" // 상품명
+                    product.quantity = 2 // 개수
+                    product.price = 2.2 // 금액
                 }
             )
         event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)
@@ -119,17 +135,17 @@ class MainSampleActivity : AppCompatActivity() {
     fun sendInAppPurchaseEvent() {
         val event = InAppPurchase()
         event.tag = "Tag" // 분류
-        event.products =  // 구매 상품 목록
+        event.products = // 구매 상품 목록
             listOf(
                 Product().also { product ->
-                    product.name = "Product 1"  // 상품명
-                    product.quantity = 1        // 개수
-                    product.price = 1.1         // 금액
+                    product.name = "Product 1" // 상품명
+                    product.quantity = 1 // 개수
+                    product.price = 1.1 // 금액
                 },
                 Product().also { product ->
-                    product.name = "Product 2"  // 상품명
-                    product.quantity = 2        // 개수
-                    product.price = 2.2         // 금액
+                    product.name = "Product 2" // 상품명
+                    product.quantity = 2 // 개수
+                    product.price = 2.2 // 금액
                 }
             )
         event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)

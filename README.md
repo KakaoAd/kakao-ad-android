@@ -188,17 +188,17 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     ```kotlin
     val event = Purchase()
     event.tag = "Tag" // 분류
-    event.products =  // 구매 상품 목록
+    event.products = // 구매 상품 목록
         listOf(
             Product().also { product ->
-                product.name = "Product 1"  // 상품명
-                product.quantity = 1        // 개수
-                product.price = 1.1         // 금액
+                product.name = "Product 1" // 상품명
+                product.quantity = 1 // 개수
+                product.price = 1.1 // 금액
             },
             Product().also { product ->
-                product.name = "Product 2"  // 상품명
-                product.quantity = 2        // 개수
-                product.price = 2.2         // 금액
+                product.name = "Product 2" // 상품명
+                product.quantity = 2 // 개수
+                product.price = 2.2 // 금액
             }
         )
     event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)
@@ -238,17 +238,17 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
         ```kotlin
         val event = InAppPurchase()
         event.tag = "Tag" // 분류
-        event.products =  // 구매 상품 목록
+        event.products = // 구매 상품 목록
             listOf(
                 Product().also { product ->
-                    product.name = "Product 1"  // 상품명
-                    product.quantity = 1        // 개수
-                    product.price = 1.1         // 금액
+                    product.name = "Product 1" // 상품명
+                    product.quantity = 1 // 개수
+                    product.price = 1.1 // 금액
                 },
                 Product().also { product ->
-                    product.name = "Product 2"  // 상품명
-                    product.quantity = 2        // 개수
-                    product.price = 2.2         // 금액
+                    product.name = "Product 2" // 상품명
+                    product.quantity = 2 // 개수
+                    product.price = 2.2 // 금액
                 }
             )
         event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)

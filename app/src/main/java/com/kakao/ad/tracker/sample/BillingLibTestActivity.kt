@@ -7,7 +7,11 @@ import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClient.BillingResponse
 import com.android.billingclient.api.BillingClient.SkuType
 import com.kakao.ad.tracker.KakaoAdTracker
-import com.kakao.ad.tracker.sample.util.*
+import com.kakao.ad.tracker.sample.util.consumePurchase
+import com.kakao.ad.tracker.sample.util.launchBillingFlow
+import com.kakao.ad.tracker.sample.util.logAndToast
+import com.kakao.ad.tracker.sample.util.logv
+import com.kakao.ad.tracker.sample.util.queryPurchases
 
 class BillingLibTestActivity : AppCompatActivity() {
 

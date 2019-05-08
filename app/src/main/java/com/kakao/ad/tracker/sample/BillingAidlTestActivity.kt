@@ -15,7 +15,6 @@ import org.json.JSONObject
 class BillingAidlTestActivity : AppCompatActivity() {
 
     companion object {
-
         private const val REQUEST_CODE_BILLING = 1001
     }
 
@@ -123,4 +122,3 @@ class BillingAidlTestActivity : AppCompatActivity() {
         }
     }
 }
-
