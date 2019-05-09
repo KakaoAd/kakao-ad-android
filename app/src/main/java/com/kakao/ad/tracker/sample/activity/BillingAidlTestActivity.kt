@@ -1,4 +1,4 @@
-package com.kakao.ad.tracker.sample
+package com.kakao.ad.tracker.sample.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.android.billingclient.api.BillingClient.SkuType
 import com.kakao.ad.tracker.KakaoAdTracker
+import com.kakao.ad.tracker.sample.R
 import com.kakao.ad.tracker.sample.util.BillingServiceHelper
 import com.kakao.ad.tracker.sample.util.logAndToast
 import com.kakao.ad.tracker.sample.util.loge

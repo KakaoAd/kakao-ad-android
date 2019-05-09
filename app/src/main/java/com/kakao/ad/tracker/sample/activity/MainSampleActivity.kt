@@ -1,4 +1,4 @@
-package com.kakao.ad.tracker.sample
+package com.kakao.ad.tracker.sample.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +12,7 @@ import com.kakao.ad.common.json.Search
 import com.kakao.ad.common.json.ViewCart
 import com.kakao.ad.common.json.ViewContent
 import com.kakao.ad.tracker.KakaoAdTracker
+import com.kakao.ad.tracker.sample.R
 import com.kakao.ad.tracker.sample.util.logAndToast
 import com.kakao.ad.tracker.send
 import kotlinx.android.synthetic.main.activity_main_sample.sendCompleteRegistrationEventButton
