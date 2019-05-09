@@ -83,12 +83,12 @@ Kakao AD SDK를 초기화 하기 위한 정보를 설정하는 방법은 다음�
         <!-- "com.android.vending.INSTALL_REFERRER"를 수신할 BroadcastReceiver 추가 -->
         <meta-data
             android:name="receiver1"
-            android:value="com.kakao.ad.tracker.sample.InstallReferrerReceiver1" />
+            android:value="com.kakao.ad.tracker.sample.receiver.InstallReferrerReceiver1" />
 
         <!-- "com.android.vending.INSTALL_REFERRER"를 수신할 BroadcastReceiver 추가 -->
         <meta-data
             android:name="receiver2"
-            android:value="com.kakao.ad.tracker.sample.InstallReferrerReceiver2" />
+            android:value="com.kakao.ad.tracker.sample.receiver.InstallReferrerReceiver2" />
     </receiver>
     ```
 

@@ -42,17 +42,17 @@
             <!-- "com.android.vending.INSTALL_REFERRER"를 수신할 BroadcastReceiver 추가 -->
             <meta-data
                 android:name="receiver1"
-                android:value="com.kakao.ad.tracker.sample.InstallReferrerReceiver1" />
+                android:value="com.kakao.ad.tracker.sample.receiver.InstallReferrerReceiver1" />
 
             <!-- "com.android.vending.INSTALL_REFERRER"를 수신할 BroadcastReceiver 추가 -->
             <meta-data
                 android:name="receiver2"
-                android:value="com.kakao.ad.tracker.sample.InstallReferrerReceiver2" />
+                android:value="com.kakao.ad.tracker.sample.receiver.InstallReferrerReceiver2" />
         </receiver>
 
         <!-- 샘플 BroadcastReceiver :: 추가하지 않아도 "KakaoAdInstallReferrerReceiver"에 의해 이벤트 전달됨 -->
         <!--<receiver-->
-            <!--android:name=".InstallReferrerReceiver1"-->
+            <!--android:name=".receiver.InstallReferrerReceiver1"-->
             <!--android:enabled="true">-->
             <!--<intent-filter>-->
                 <!--<action android:name="com.android.vending.INSTALL_REFERRER" />-->
@@ -61,7 +61,7 @@
 
         <!-- 샘플 BroadcastReceiver :: 추가가 필요하다면 "KakaoAdInstallReferrerReceiver" 추가한 다음 추가해야 함!!! -->
         <receiver
-            android:name=".InstallReferrerReceiver2"
+            android:name=".receiver.InstallReferrerReceiver2"
             android:enabled="true">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />

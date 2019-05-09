@@ -1,4 +1,4 @@
-package com.kakao.ad.tracker.sample
+package com.kakao.ad.tracker.sample.receiver
 
 import android.content.BroadcastReceiver
 import android.content.Context
