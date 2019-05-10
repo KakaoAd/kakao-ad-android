@@ -120,7 +120,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
 이벤트를 수집하기 위해서는 `KakaoAdTracker`를 초기화하는 과정이 필요합니다.<br/>
 앱 실행 시점인 `Application#onCreate()` 또는 `Activity#onCreate()` 내에 다음과 같은 코드를 추가하여 `KakaoAdTracker`를 초기화합니다.
 
-* **Kotlin**
+* Kotlin
     ```kotlin
     override fun onCreate() {
         super.onCreate()
@@ -131,7 +131,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     }
     ```
 
-* **Java**
+* Java
     ```java
     @Override
     public void onCreate() {
@@ -145,23 +145,27 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
 
 ### 이벤트 전송하기
 
-#### Kotlin 샘플 코드
+#### 가입
 
-1. 가입
+* Kotlin
     ```kotlin
     val event = CompleteRegistration()
     event.tag = "Tag" // 분류
     event.send()
     ```
 
-1. 페이지 방문
+#### 페이지 방문
+
+* Kotlin
     ```kotlin
     val event = PageView()
     event.tag = "Tag" // 분류
     event.send()
     ```
 
-1. 검색
+#### 검색
+
+* Kotlin
     ```kotlin
     val event = Search()
     event.tag = "Tag" // 분류
@@ -169,7 +173,9 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.send()
     ```
 
-1. 콘텐츠/상품 조회
+#### 콘텐츠/상품 조회
+
+* Kotlin
     ```kotlin
     val event = ViewContent()
     event.tag = "Tag" // 분류
@@ -177,14 +183,18 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.send()
     ```
 
-1. 장바구니 보기
+#### 장바구니 보기
+
+* Kotlin
     ```kotlin
     val event = ViewCart()
     event.tag = "Tag" // 분류
     event.send()
     ```
 
-1. 구매
+#### 구매
+
+* Kotlin
     ```kotlin
     val event = Purchase()
     event.tag = "Tag" // 분류
@@ -207,55 +217,61 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.send()
     ```
 
-1. 인앱 구매
-    1. [Billing Library](https://developer.android.com/google/play/billing/billing_library_overview)를 사용하는 경우
-        * `BillingClient` 생성 시, PurchasesUpdatedListener에서 `KakaoAdTracker.sendInAppPurchaseData(purchase.originalJson)` 호출
-        ```kotlin
-        BillingClient.newBuilder(context)
-            .setListener (object : PurchasesUpdatedListener {
-                override fun onPurchasesUpdated(responseCode: Int, purchases: MutableList<Purchase>?) {
-                    if (responseCode == BillingResponse.OK && purchases != null) {
-                        purchases.forEach { purchase ->
-                            KakaoAdTracker.sendInAppPurchaseData(purchase.originalJson) // 인앱 구매 데이터 전송
-                        }
+#### 인앱 구매
+
+1. [Billing Library](https://developer.android.com/google/play/billing/billing_library_overview)를 사용하는 경우
+* `BillingClient` 생성 시, PurchasesUpdatedListener에서 `KakaoAdTracker.sendInAppPurchaseData()`을 호출
+* Kotlin
+    ```kotlin
+    BillingClient.newBuilder(context)
+        .setListener (object : PurchasesUpdatedListener {
+            override fun onPurchasesUpdated(responseCode: Int, purchases: MutableList<Purchase>?) {
+                if (responseCode == BillingResponse.OK && purchases != null) {
+                    purchases.forEach { purchase ->
+                        KakaoAdTracker.sendInAppPurchaseData(purchase.originalJson) // 인앱 구매 데이터 전송
                     }
                 }
-            })
-            .build()
-        ```
-    2. [Billing Service AIDL](https://developer.android.com/google/play/billing/billing_library_overview)을 사용하는 경우
-        * 인앱 구매 요청 후, `onActivityResult()`에서 `KakaoAdTracker.sendInAppBillingResult(data)` 호출
-        ```kotlin
-        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-            super.onActivityResult(requestCode, resultCode, data)
-
-            if (requestCode == REQUEST_CODE_BILLING && data != null) {
-                KakaoAdTracker.sendInAppBillingResult(data) // 인앱 구매 데이터 전송
             }
+        })
+        .build()
+    ```
+
+2. [Billing Service AIDL](https://developer.android.com/google/play/billing/billing_library_overview)을 사용하는 경우
+* 인앱 구매 요청 후, `onActivityResult()`에서 `KakaoAdTracker.sendInAppBillingResult()` 호출
+* Kotlin
+    ```kotlin
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQUEST_CODE_BILLING && data != null) {
+            KakaoAdTracker.sendInAppBillingResult(data) // 인앱 구매 데이터 전송
         }
-        ```
-    3. 수동으로 전송하는 경우
-        ```kotlin
-        val event = InAppPurchase()
-        event.tag = "Tag" // 분류
-        event.products = // 구매 상품 목록
-            listOf(
-                Product().also { product ->
-                    product.name = "Product 1" // 상품명
-                    product.quantity = 1 // 개수
-                    product.price = 1.1 // 금액
-                },
-                Product().also { product ->
-                    product.name = "Product 2" // 상품명
-                    product.quantity = 2 // 개수
-                    product.price = 2.2 // 금액
-                }
-            )
-        event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)
-        event.total_quantity = event.products?.sumBy { it.quantity } // 총 개수
-        event.total_price = event.products?.sumByDouble { it.price } // 총 금액
-        event.send()
-        ```
+    }
+    ```
+
+3. 수동으로 전송하는 경우
+* Kotlin
+    ```kotlin
+    val event = InAppPurchase()
+    event.tag = "Tag" // 분류
+    event.products = // 구매 상품 목록
+        listOf(
+            Product().also { product ->
+                product.name = "Product 1" // 상품명
+                product.quantity = 1 // 개수
+                product.price = 1.1 // 금액
+            },
+            Product().also { product ->
+                product.name = "Product 2" // 상품명
+                product.quantity = 2 // 개수
+                product.price = 2.2 // 금액
+            }
+        )
+    event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)
+    event.total_quantity = event.products?.sumBy { it.quantity } // 총 개수
+    event.total_price = event.products?.sumByDouble { it.price } // 총 금액
+    event.send()
+    ```
 
 
 ## License
