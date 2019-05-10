@@ -154,6 +154,13 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.send()
     ```
 
+* Java
+    ```java
+    CompleteRegistration event = new CompleteRegistration();
+    event.tag = "Tag"; // 분류
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```
+
 #### 페이지 방문
 
 * Kotlin
@@ -161,6 +168,13 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     val event = PageView()
     event.tag = "Tag" // 분류
     event.send()
+    ```
+
+* Java
+    ```java
+    PageView event = new PageView();
+    event.tag = "Tag"; // 분류
+    KakaoAdTracker.getInstance().sendEvent(event);
     ```
 
 #### 검색
@@ -173,6 +187,14 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.send()
     ```
 
+* Java
+    ```java
+    Search event = new Search();
+    event.tag = "Tag"; // 분류
+    event.search_string = "Keyword"; // 검색 문자열
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```
+
 #### 콘텐츠/상품 조회
 
 * Kotlin
@@ -183,6 +205,14 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.send()
     ```
 
+* Java
+    ```java
+    ViewContent event = new ViewContent();
+    event.tag = "Tag"; // 분류
+    event.content_id = "Content ID"; // 상품 코드
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```
+
 #### 장바구니 보기
 
 * Kotlin
@@ -190,6 +220,13 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     val event = ViewCart()
     event.tag = "Tag" // 분류
     event.send()
+    ```
+
+* Java
+    ```java
+    ViewCart event = new ViewCart();
+    event.tag = "Tag"; // 분류
+    KakaoAdTracker.getInstance().sendEvent(event);
     ```
 
 #### 구매
@@ -217,6 +254,35 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.send()
     ```
 
+* Java
+    ```java
+    Product product1 = new Product(); // 상품
+    product1.name = "Product 1"; // 상품명
+    product1.quantity = 1; // 개수
+    product1.price = 1.1; // 금액
+
+    Product product2 = new Product(); // 상품
+    product2.name = "Product 2"; // 상품명
+    product2.quantity = 2; // 개수
+    product2.price = 2.2; // 금액
+
+    List<Product> products = Arrays.asList(product1, product2); // 구매 상품 목록
+    int totalQuantity = 0;
+    double totalPrice = 0;
+    for (Product product : products) {
+        totalQuantity += product.quantity; // 총 개수
+        totalPrice += product.price; // 총 금액
+    }
+
+    Purchase event = new Purchase(); // 구매 이벤트
+    event.tag = "Tag"; // 분류
+    event.products = products; // 구매 상품 목록
+    event.currency = Currency.getInstance(Locale.KOREA); // 통화코드(ISO-4217)
+    event.total_quantity = totalQuantity; // 총 개수
+    event.total_price = totalPrice; // 총 금액
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```
+
 #### 인앱 구매
 
 1. [Billing Library](https://developer.android.com/google/play/billing/billing_library_overview)를 사용하는 경우
@@ -235,6 +301,21 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
         })
         .build()
     ```
+* Java
+    ```java
+    BillingClient.newBuilder(context)
+            .setListener(new PurchasesUpdatedListener() {
+                @Override
+                public void onPurchasesUpdated(int responseCode, @Nullable List<Purchase> purchases) {
+                    if (responseCode == BillingResponse.OK && purchases != null) {
+                        for (Purchase purchase : purchases) {
+                            KakaoAdTracker.getInstance().sendInAppPurchaseData(purchase.getOriginalJson()); // 인앱 구매 데이터 전송
+                        }
+                    }
+                }
+            })
+            .build();
+    ```
 
 2. [Billing Service AIDL](https://developer.android.com/google/play/billing/billing_library_overview)을 사용하는 경우
 * 인앱 구매 요청 후, `onActivityResult()`에서 `KakaoAdTracker.sendInAppBillingResult()` 호출
@@ -245,6 +326,15 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
 
         if (requestCode == REQUEST_CODE_BILLING && data != null) {
             KakaoAdTracker.sendInAppBillingResult(data) // 인앱 구매 데이터 전송
+        }
+    }
+    ```
+* Java
+    ```java
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == REQUEST_CODE_BILLING && data != null) {
+            KakaoAdTracker.getInstance().sendInAppBillingResult(data);
         }
     }
     ```
@@ -271,6 +361,34 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.total_quantity = event.products?.sumBy { it.quantity } // 총 개수
     event.total_price = event.products?.sumByDouble { it.price } // 총 금액
     event.send()
+    ```
+* Java
+    ```java
+    Product product1 = new Product();
+    product1.name = "Product 1"; // 상품명
+    product1.quantity = 1; // 개수
+    product1.price = 1.1; // 금액
+
+    Product product2 = new Product();
+    product2.name = "Product 2"; // 상품명
+    product2.quantity = 2; // 개수
+    product2.price = 2.2; // 금액
+
+    List<Product> products = Arrays.asList(product1, product2); // 구매 상품 목록
+    int totalQuantity = 0;
+    double totalPrice = 0;
+    for (Product product : products) {
+        totalQuantity += product.quantity; // 총 개수
+        totalPrice += product.price; // 총 금액
+    }
+
+    InAppPurchase event = new InAppPurchase();
+    event.tag = "Tag"; // 분류
+    event.products = products; // 구매 상품 목록
+    event.currency = Currency.getInstance(Locale.KOREA); // 통화코드(ISO-4217)
+    event.total_quantity = totalQuantity; // 총 개수
+    event.total_price = totalPrice; // 총 금액
+    KakaoAdTracker.getInstance().sendEvent(event);
     ```
 
 
