@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Kakao Ad Tracker Sample</string>
+    <string name="kakao_ad_track_id" translatable="false">Input Your Track ID</string>
+</resources>

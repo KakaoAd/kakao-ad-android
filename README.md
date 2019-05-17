@@ -1,95 +1,109 @@
-# Kakao Ad Android SDK Guide
-> 이 가이드는 Android Application에 이벤트 수집을 위한 가이드를 제공하고 있습니다.
+# Kakao AD Android SDK Guide
 
-## 1. 소개
-- Android 어플리케이션에서 다음과 같은 이벤트를 수집하고 전송하고 있습니다. 수집된 데이터를 이용하여 다양한 목적으로 활용할 수 있습니다.
-- 앱 설치 / 앱 실행 / 가입 완료
-- 장바구니 보기 / 콘텐츠/상품 보기 / 검색
-- 구매 / 앱 내 구매
+## 시작하기
+* 최신 버전의 Kakao AD SDK 사용을 권장합니다.
+* 최신 버전의 [Android Studio](https://developer.android.com/studio/) 사용을 권장합니다. Eclipse에 대한 기술 지원은 하지 않습니다.
+* 최신 버전의 [Kotlin](https://developer.android.com/kotlin/) 사용을 권장합니다.
+* Kakao AD SDK는 [Android 4.0(Ice Cream Sandwich, API Level 14)](https://developer.android.com/about/versions/android-4.0) 이상 기기에서 동작합니다.
 
-## 2. SDK 설치
-* SDK 설치에 관한 가이드는 Android Studio 기준이며, Eclipse에 대한 기술지원은 하지 않습니다.
-* Android Studio 사용을 권장합니다.
-* Android API 14 이상에서 사용가능합니다.
 
-### 2.0. SDK 구성
+### 트랙 ID(Track ID) 발급받기
+Kakao AD SDK를 이용하기 위해서는 먼저 고유한 식별값인 트랙 ID(Track Id)가 필요합니다.<br/>
+Track ID는 [https://moment.kakao.com](https://moment.kakao.com/login) 에서 회원 가입 후, [https://moment.kakao.com/mypixel](https://moment.kakao.com/mypixel) 페이지에서 발급 받을 수 있습니다.
+Track ID 발급이 완료된 후, 다음 단계의 안내에 따라 Kakao AD SDK를 설치해주세요.
 
-* `tracker-library-X.X.X.aar` : SDK 라이브러리
-* `tracker-sample/src/com/kakao/ad/tracker/sample` : 샘플 프로젝트
+### build.gradle 설정하기
+Kakao AD SDK를 사용하기 위해서는 Kotlin과 Google Play Service SDK에 대한 설정이 필요합니다.<br/>
+Kotlin과 Google Play Service SDK 설정 방법에 대해서는 아래 사이트와 샘플 프로젝트를 참고 부탁드립니다.
+* Kotlin 설정 방법: [http://kotlinlang.org/docs/tutorials/kotlin-android.html](http://kotlinlang.org/docs/tutorials/kotlin-android.html)
+* Google Play Service SDK 설정 방법: [https://developers.google.com/android/guides/setup](https://developers.google.com/android/guides/setup)
 
-### 2.1. 트랙 ID(Track ID) 발급받기
-카카오계정에서는 카카오SDK에서 사용하기 위한 고유한 식별값(Track Id)을 발급할 수 있습니다. 
-이벤트 수집 SDK를 이용하기 위해서는, 먼저 고유한 식별값이 필요합니다. <br>
-[https://moment.kakao.com](https://moment.kakao.com/login) 에서 회원 가입 후, <br>
-[https://moment.kakao.com/mypixel](https://moment.kakao.com/mypixel) 페이지에서 Track ID 발급 단계를 진행할 수 있습니다.
+Kakao AD SDK를 추가하는 방법은 다음과 같습니다.
+1. 먼저 최상위 [`build.gradle`](build.gradle) 파일에 Maven repository를 추가합니다.
 
-Track ID 발급이 완료된 후, 다음 단계의 안내에 따라 Kakao SDK를 설치해주세요.
-
-### 2.2. 라이브러리 추가 (Android Studio 기준)
-`build.gradle` 파일에 아래 내용을 추가합니다.
-```gradle
-repositories { 
-    maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
-}
-
-dependencies {
-    implementation 'com.kakao.ad:tracker:0.2.7@aar'
-}
-```
-
-### 2.3. AndroidManifest.xml 설정
-- 아래 두 가지 필수 권한을 AndroidManifist.xml 에 추가합니다.
-
-```
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-```
-
-### 2.4. Google Play Service SDK 설정
-Google Play Store에 App을 개시하는 경우, App 내에 광고가 있다면 [반드시 Google Advertising ID를 사용하도록 규정이 변경](https://play.google.com/about/developer-content-policy.html#ADID)되었습니다.
-
-이에 따라, SDK에서 Google Play Service SDK를 사용할 수 있는 경우에 한해 Google Advertising ID를 사용할 수 있도록 기능이 추가되었습니다.
-
-참고로, Google Play Service SDK를 사용하지 않은 앱에 대해서는 _"광고가 Google Advertising ID를 사용하지 않았다"_ 는 이유로 Google Play Store에서 임의로 Reject 당할 수도 있습니다.
-
-이에 따라, **<span style="color:red">SDK에서 Google Play Service SDK가 없이는 라이브러리를 사용할 수 없도록 변경</span>되었습니다.**
-
-#### 2.4.1. Google Play Service SDK 설정 추가하기
-
-Google Play Services SDK를 사용하기 위해, build.gradle을 다음과 같이 합니다.
-
-1. 먼저 최상위 `build.gradle` 파일에 Google's Maven repository를 추가합니다.  
-```gradle
-allprojects {
-    repositories {
-        google()
-
-        // 사용 중인 Gradle 버전이 4.1보다 낮은 경우, 다음과 같이 대신 설정합니다.
-        //
-        // maven {
-        //     url 'https://maven.google.com'
-        // }
+    ```gradle
+    allprojects {
+        repositories {
+            google()
+            jcenter()
+            maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
+        }
     }
-}
-```
+    ```
 
-2. App 모듈의 dependencies 블럭에 최신 버전의 `play-services` 라이브러리를 추가합니다.  
-```gradle
-dependencies {
-    implementation 'com.google.android.gms:play-services-base:+'
-    implementation 'com.google.android.gms:play-services-ads:+'
-}
-```
+2. App 모듈 [`build.gradle`](app/build.gradle) 파일에 최신 버전의 Kakao AD SDK를 추가합니다.
 
-3. 설정 후, 툴바의 **Sync Project with Gradle Files**를 눌러 변경사항을 반영합니다.
+    ```gradle
+    dependencies {
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+        implementation "com.google.android.gms:play-services-ads-identifier:$play_service_version"
 
-위 내용은 TrackerSample 프로젝트에 적용되어 있으니 참고 부탁드리며,   
-Google Play Service SDK에 대한 자세한 사항은 [Setting Up Google Play Services 링크](https://developers.google.com/android/guides/setup)를 참고 부탁드립니다.
+        implementation "com.kakao.ad:tracker:$kakao_ad_tracker_version"
+    }
+    ```
 
-## 3. 이벤트 트래킹 사용 가이드
-다양한 이벤트를 트래킹을 제공합니다. 이벤트의 종류에 따라 자동으로 트래킹이 되는 것이 있고, 명시적으로 이벤트 트래킹을 해야하는 이벤트가 있습니다.
+3. 설정 후, 툴바의 "Sync Project with Gradle Files" 버튼을 눌러 변경사항을 반영합니다.
 
-| 이벤트 | 클래스| 자동 트래킹 유무 |
+
+### AndroidManifest.xml 설정하기
+Kakao AD SDK를 초기화 하기 위한 정보를 설정하는 방법은 다음과 같습니다.
+1. 먼저 [`strings.xml`](app/src/main/res/values/strings.xml)에 발급 받은 Track ID를 문자열 리소스로 추가합니다.
+
+    ```xml
+    <string name="kakao_ad_track_id" translatable="false">Input Your Track ID</string>
+    ```
+2. [`AndroidManifest.xml`](app/src/main/AndroidManifest.xml) 파일 `<application>` 태그 하위에 `<meta-data>`를 추가합니다.<br/>
+`<meta-data>`의 `name`은 `com.kakao.ad.tracker.TRACK_ID`를 사용하고, `value`는 위에서 추가한 리소스 정보를 사용합니다.
+
+    ```xml
+    <application>
+        <!-- Track ID 정보 추가 -->
+        <meta-data
+            android:name="com.kakao.ad.tracker.TRACK_ID"
+            android:value="@string/kakao_ad_track_id" />
+    </application>
+    ```
+
+3. `com.android.vending.INSTALL_REFERRER` 정보를 Kakao AD SDK의 `KakaoAdInstallReferrerReceiver`외에
+다른 `BroadcastReceiver`에 전달하기 위해서는 추가 설정이 필요합니다.<br/>
+[`AndroidManifest.xml`](app/src/main/AndroidManifest.xml) 파일에 `KakaoAdInstallReferrerReceiver`를 추가합니다.<br/>
+`KakaoAdInstallReferrerReceiver`는 다른 `BroadcastReceiver`보다 **먼저 추가해야 합니다!!!**<br/>
+`KakaoAdInstallReferrerReceiver`의 `<receiver>` 태그 하위에 `<meta-data>`를 추가합니다.<br/>
+`<meta-data>`의 `name`은 전달이 필요한 `BroadcastReceiver`의 별칭을 사용하고, `value`는 클래스명을 사용합니다.
+
+    ```xml
+    <!-- "KakaoAdInstallReferrerReceiver"를 BroadcastReceiver 중 가장 먼저 추가!!! -->
+    <receiver
+        android:name="com.kakao.ad.tracker.KakaoAdInstallReferrerReceiver"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="com.android.vending.INSTALL_REFERRER" />
+        </intent-filter>
+
+        <!-- "com.android.vending.INSTALL_REFERRER"를 수신할 BroadcastReceiver 추가 -->
+        <meta-data
+            android:name="receiver1"
+            android:value="com.kakao.ad.tracker.sample.receiver.InstallReferrerReceiver1" />
+
+        <!-- "com.android.vending.INSTALL_REFERRER"를 수신할 BroadcastReceiver 추가 -->
+        <meta-data
+            android:name="receiver2"
+            android:value="com.kakao.ad.tracker.sample.receiver.InstallReferrerReceiver2" />
+    </receiver>
+    ```
+
+* `<meta-data>`에 등록된 `BroadcastReceiver`는 `AndroidManifest.xml`에 `receiver`로 추가하지 않아도 `com.android.vending.INSTALL_REFERRER` 정보를 수신할 수 있습니다.
+* `BroadcastReceiver`를 `AndroidManifest.xml`에 추가할 경우, 반드시 `KakaoAdInstallReferrerReceiver`를 추가한 다음 `BroadcastReceiver`를 추가해야 합니다.
+
+
+## 이벤트 수집하기
+
+
+###  이벤트 종류
+Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
+앱 설치 이벤트(AppInstall)와 실행 이벤트(AppLaunch)는 `KakaoAdTracker`를 초기화하는 시점에 자동적으로 수집됩니다.
+
+| 이벤트 | 클래스| 자동 수집 유무 |
 |---|---|---|
 | 앱 설치 | AppInstall | O |
 | 앱 실행 | AppLaunch | O |
@@ -98,132 +112,271 @@ Google Play Service SDK에 대한 자세한 사항은 [Setting Up Google Play Se
 | 콘텐츠/상품 조회 | ViewContent | X |
 | 장바구니 보기 | ViewCart | X |
 | 구매 | Purchase | X |
-| InApp 구매 | InAppPurchase | X |
+| 인앱 구매 | InAppPurchase | X |
 
-### 3.1. 초기화
-```
-KakaoAdTracker.getInstance().init(this, "track_id");
-```
 
-### 3.2. 앱 설치
-별도의 Install Referrer를 처리 하지 않는다면 아래와 같이 `<application />` tag 안에 `receiver`를 추가한다.
+### KakaoAdTracker 초기화 하기
+이벤트를 수집하기 위해서는 `KakaoAdTracker`를 초기화하는 과정이 필요합니다.<br/>
+앱 실행 시점인 `Application#onCreate()` 또는 `Activity#onCreate()` 내에 다음과 같은 코드를 추가하여 `KakaoAdTracker`를 초기화합니다.
 
-#### 3.2.1. 신규 Receiver를 추가할 경우
-```xml
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="your.app.package.namespace">
-    <application>
-            
-        <!-- Application Tag 하위에 아래 내용을 추가한다 -->
-        <receiver
-            android:name="com.kakao.ad.tracker.KakaoAdInstallReferrerReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER">
-                </action>
-            </intent-filter>
-        </receiver>
-    </application>
-</manifest>
-```
+* Kotlin
+    ```kotlin
+    override fun onCreate() {
+        super.onCreate()
 
-#### 3.2.2. 기존에 Receiver를 사용 중일 경우
-```xml
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="your.app.package.namespace">
-    <application>
-            
-        <!-- Application Tag 하위에 아래 내용을 추가한다 -->
-        <receiver
-            android:name="com.kakao.ad.tracker.KakaoAdInstallReferrerReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER">
-                </action>
-            </intent-filter>
-            
-            <!-- 
-                이벤트를 다른 Receiver에 전달하고 싶은 경우, 해당 Receiver의 Class를 value에 적어준다 
-                
-                예) Tune의 com.tune.TuneTracker에 INSTALL_REFERRER 액션을 전달하고 싶은 경우, 
-                   아래와 같이 meta-data를 추가하면 된다. 
-            -->
-            <meta-data android:name="tuneTracker" android:value="com.tune.TuneTracker"></meta-data>
-        </receiver>
-    </application>
-</manifest>
-```
-### 3.3. 앱 실행
-별 다른 설정 없이, 최초에 앱이 설치된 이후에 재실행시에는 앱 실행 이벤트가 전송된다.
+        if (!KakaoAdTracker.isInitialized) {
+            KakaoAdTracker.init(applicationContext, getString(R.string.kakao_ad_track_id))
+        }
+    }
+    ```
 
-### 3.4. 가입
-```
-Event event = new CompleteRegistration();
-event.tag = "tag";
+* Java
+    ```java
+    @Override
+    public void onCreate() {
+        super.onCreate();
 
-KakaoAdTracker.getInstance().sendEvent(event);
-```
+        if (!KakaoAdTracker.isInitialized()) {
+            KakaoAdTracker.getInstance().init(getApplicationContext(), getString(R.string.kakao_ad_track_id));
+        }
+    }
+    ```
 
-### 3.5. 검색
-```
-Event event = new Search();
-event.tag = "tag";
-((Search) event).search_string = "robot";
+### 이벤트 전송하기
 
-KakaoAdTracker.getInstance().sendEvent(event);
-```
+#### 가입
 
-### 3.6. 콘텐츠/상품 조회
-```
-Event event = new ViewContent();
-event.tag = "tag";
-((ViewContent) event).content_id = "contentId";
+* Kotlin
+    ```kotlin
+    val event = CompleteRegistration()
+    event.tag = "Tag" // 분류
+    event.send()
+    ```
 
-KakaoAdTracker.getInstance().sendEvent(event);
-```
+* Java
+    ```java
+    CompleteRegistration event = new CompleteRegistration();
+    event.tag = "Tag"; // 분류
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```
 
-### 3.7. 장바구니 보기
-```
-Event event = new ViewCart();
-event.tag = "tag";
+#### 검색
 
-KakaoAdTracker.getInstance().sendEvent(event);
-```
+* Kotlin
+    ```kotlin
+    val event = Search()
+    event.tag = "Tag" // 분류
+    event.search_string = "Keyword" // 검색 문자열
+    event.send()
+    ```
 
-### 3.8. 구매
-```
-Event event = new Purchase();
-event.tag = "tag";
+* Java
+    ```java
+    Search event = new Search();
+    event.tag = "Tag"; // 분류
+    event.search_string = "Keyword"; // 검색 문자열
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```
 
-// 구매상품 1
-Product product1 = new Product();
-product1.name = "product1";
-product1.quantity = 1;
-product1.price = 1.11;
+#### 콘텐츠/상품 조회
 
-// 구매상품 2
-Product product2 = new Product();
-product2.name = "product2";
-product2.quantity = 2;
-product2.price = 2.22;
+* Kotlin
+    ```kotlin
+    val event = ViewContent()
+    event.tag = "Tag" // 분류
+    event.content_id = "Content ID" // 상품 코드
+    event.send()
+    ```
 
-((Purchase) event).setProducts(new ArrayList<>(Arrays.asList(product1, product2)));
-((Purchase) event).currency = Currency.getInstance(Locale.KOREA);
-((Purchase) event).total_price = 1000.40;
-((Purchase) event).total_quantity = 10;
+* Java
+    ```java
+    ViewContent event = new ViewContent();
+    event.tag = "Tag"; // 분류
+    event.content_id = "Content ID"; // 상품 코드
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```
 
-KakaoAdTracker.getInstance().sendEvent(event);
-```
+#### 장바구니 보기
 
-### 3.9 InApp 구매
-```
-Event event = new InAppPurchase();
-event.tag = "tag";
+* Kotlin
+    ```kotlin
+    val event = ViewCart()
+    event.tag = "Tag" // 분류
+    event.send()
+    ```
 
-KakaoAdTracker.getInstance().sendEvent(event);
-```
+* Java
+    ```java
+    ViewCart event = new ViewCart();
+    event.tag = "Tag"; // 분류
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```
+
+#### 구매
+
+* Kotlin
+    ```kotlin
+    val event = Purchase()
+    event.tag = "Tag" // 분류
+    event.products = // 구매 상품 목록
+        listOf(
+            Product().also { product ->
+                product.name = "Product 1" // 상품명
+                product.quantity = 1 // 개수
+                product.price = 1.1 // 금액
+            },
+            Product().also { product ->
+                product.name = "Product 2" // 상품명
+                product.quantity = 2 // 개수
+                product.price = 2.2 // 금액
+            }
+        )
+    event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)
+    event.total_quantity = event.products?.sumBy { it.quantity } // 총 개수
+    event.total_price = event.products?.sumByDouble { it.price } // 총 금액
+    event.send()
+    ```
+
+* Java
+    ```java
+    Product product1 = new Product(); // 상품
+    product1.name = "Product 1"; // 상품명
+    product1.quantity = 1; // 개수
+    product1.price = 1.1; // 금액
+
+    Product product2 = new Product(); // 상품
+    product2.name = "Product 2"; // 상품명
+    product2.quantity = 2; // 개수
+    product2.price = 2.2; // 금액
+
+    List<Product> products = Arrays.asList(product1, product2); // 구매 상품 목록
+    int totalQuantity = 0;
+    double totalPrice = 0;
+    for (Product product : products) {
+        totalQuantity += product.quantity; // 총 개수
+        totalPrice += product.price; // 총 금액
+    }
+
+    Purchase event = new Purchase(); // 구매 이벤트
+    event.tag = "Tag"; // 분류
+    event.products = products; // 구매 상품 목록
+    event.currency = Currency.getInstance(Locale.KOREA); // 통화코드(ISO-4217)
+    event.total_quantity = totalQuantity; // 총 개수
+    event.total_price = totalPrice; // 총 금액
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```
+
+#### 인앱 구매
+
+1. [Billing Library](https://developer.android.com/google/play/billing/billing_library_overview)를 사용하는 경우
+* `BillingClient` 생성 시, PurchasesUpdatedListener에서 `KakaoAdTracker.sendInAppPurchaseData()`을 호출
+* Kotlin
+    ```kotlin
+    BillingClient.newBuilder(context)
+        .setListener (object : PurchasesUpdatedListener {
+            override fun onPurchasesUpdated(responseCode: Int, purchases: MutableList<Purchase>?) {
+                if (responseCode == BillingResponse.OK && purchases != null) {
+                    purchases.forEach { purchase ->
+                        KakaoAdTracker.sendInAppPurchaseData(purchase.originalJson) // 인앱 구매 데이터 전송
+                    }
+                }
+            }
+        })
+        .build()
+    ```
+* Java
+    ```java
+    BillingClient.newBuilder(context)
+            .setListener(new PurchasesUpdatedListener() {
+                @Override
+                public void onPurchasesUpdated(int responseCode, @Nullable List<Purchase> purchases) {
+                    if (responseCode == BillingResponse.OK && purchases != null) {
+                        for (Purchase purchase : purchases) {
+                            KakaoAdTracker.getInstance().sendInAppPurchaseData(purchase.getOriginalJson()); // 인앱 구매 데이터 전송
+                        }
+                    }
+                }
+            })
+            .build();
+    ```
+
+2. [Billing Service AIDL](https://developer.android.com/google/play/billing/billing_library_overview)을 사용하는 경우
+* 인앱 구매 요청 후, `onActivityResult()`에서 `KakaoAdTracker.sendInAppBillingResult()` 호출
+* Kotlin
+    ```kotlin
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQUEST_CODE_BILLING && data != null) {
+            KakaoAdTracker.sendInAppBillingResult(data) // 인앱 구매 데이터 전송
+        }
+    }
+    ```
+* Java
+    ```java
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == REQUEST_CODE_BILLING && data != null) {
+            KakaoAdTracker.getInstance().sendInAppBillingResult(data);
+        }
+    }
+    ```
+
+3. 수동으로 전송하는 경우
+* Kotlin
+    ```kotlin
+    val event = InAppPurchase()
+    event.tag = "Tag" // 분류
+    event.products = // 구매 상품 목록
+        listOf(
+            Product().also { product ->
+                product.name = "Product 1" // 상품명
+                product.quantity = 1 // 개수
+                product.price = 1.1 // 금액
+            },
+            Product().also { product ->
+                product.name = "Product 2" // 상품명
+                product.quantity = 2 // 개수
+                product.price = 2.2 // 금액
+            }
+        )
+    event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)
+    event.total_quantity = event.products?.sumBy { it.quantity } // 총 개수
+    event.total_price = event.products?.sumByDouble { it.price } // 총 금액
+    event.send()
+    ```
+* Java
+    ```java
+    Product product1 = new Product();
+    product1.name = "Product 1"; // 상품명
+    product1.quantity = 1; // 개수
+    product1.price = 1.1; // 금액
+
+    Product product2 = new Product();
+    product2.name = "Product 2"; // 상품명
+    product2.quantity = 2; // 개수
+    product2.price = 2.2; // 금액
+
+    List<Product> products = Arrays.asList(product1, product2); // 구매 상품 목록
+    int totalQuantity = 0;
+    double totalPrice = 0;
+    for (Product product : products) {
+        totalQuantity += product.quantity; // 총 개수
+        totalPrice += product.price; // 총 금액
+    }
+
+    InAppPurchase event = new InAppPurchase();
+    event.tag = "Tag"; // 분류
+    event.products = products; // 구매 상품 목록
+    event.currency = Currency.getInstance(Locale.KOREA); // 통화코드(ISO-4217)
+    event.total_quantity = totalQuantity; // 총 개수
+    event.total_price = totalPrice; // 총 금액
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```
+
 
 ## License
+
 ```
 Copyright 2017 © Kakao Corp. All Rights Reserved.
 

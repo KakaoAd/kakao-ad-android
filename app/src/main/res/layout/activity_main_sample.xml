@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".activity.MainSampleActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:minHeight="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="Kakao AD Tracker Sample"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:text="CompleteRegistration" />
+
+            <Button
+                android:id="@+id/sendCompleteRegistrationEventButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:minWidth="130dp"
+                android:text="Send" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:text="Search" />
+
+            <Button
+                android:id="@+id/sendSearchEventButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:minWidth="130dp"
+                android:text="Send" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:text="ViewContent" />
+
+            <Button
+                android:id="@+id/sendViewContentEventButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:minWidth="130dp"
+                android:text="Send" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:text="ViewCart" />
+
+            <Button
+                android:id="@+id/sendViewCartEventButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:minWidth="130dp"
+                android:text="Send" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:text="Purchase" />
+
+            <Button
+                android:id="@+id/sendPurchaseEventButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:minWidth="130dp"
+                android:text="Send" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:text="InAppPurchase" />
+
+            <Button
+                android:id="@+id/sendInAppPurchaseEventButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:minWidth="130dp"
+                android:text="Send" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:text="InAppPurchase\n(use Billing library)" />
+
+            <Button
+                android:id="@+id/startInAppBillingLibTestButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:minWidth="130dp"
+                android:text="Start" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:text="InAppPurchase\n(use Billing AIDL)" />
+
+            <Button
+                android:id="@+id/startInAppBillingAidlTestButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:minWidth="130dp"
+                android:text="Start" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:minHeight="20dp" />
+    </LinearLayout>
+</ScrollView>
