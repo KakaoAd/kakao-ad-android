@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.kakao.ad.common.json.CompleteRegistration
 import com.kakao.ad.common.json.InAppPurchase
-import com.kakao.ad.common.json.PageView
 import com.kakao.ad.common.json.Product
 import com.kakao.ad.common.json.Purchase
 import com.kakao.ad.common.json.Search
@@ -17,7 +16,6 @@ import com.kakao.ad.tracker.sample.util.logAndToast
 import com.kakao.ad.tracker.send
 import kotlinx.android.synthetic.main.activity_main_sample.sendCompleteRegistrationEventButton
 import kotlinx.android.synthetic.main.activity_main_sample.sendInAppPurchaseEventButton
-import kotlinx.android.synthetic.main.activity_main_sample.sendPageViewEventButton
 import kotlinx.android.synthetic.main.activity_main_sample.sendPurchaseEventButton
 import kotlinx.android.synthetic.main.activity_main_sample.sendSearchEventButton
 import kotlinx.android.synthetic.main.activity_main_sample.sendViewCartEventButton
@@ -44,7 +42,6 @@ class MainSampleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main_sample)
 
         sendCompleteRegistrationEventButton.setOnClickListener { sendCompleteRegistrationEvent() }
-        sendPageViewEventButton.setOnClickListener { sendPageViewEvent() }
         sendSearchEventButton.setOnClickListener { sendSearchEvent() }
         sendViewContentEventButton.setOnClickListener { sendViewContentEvent() }
         sendViewCartEventButton.setOnClickListener { sendViewCartEvent() }
@@ -63,15 +60,6 @@ class MainSampleActivity : AppCompatActivity() {
      */
     fun sendCompleteRegistrationEvent() {
         val event = CompleteRegistration()
-        event.tag = "Tag" // 분류
-        event.send()
-    }
-
-    /**
-     * 페이지 방문 이밴트(PageView)를 전송합니다.
-     */
-    fun sendPageViewEvent() {
-        val event = PageView()
         event.tag = "Tag" // 분류
         event.send()
     }

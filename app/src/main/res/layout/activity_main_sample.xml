@@ -72,34 +72,6 @@
                 android:layout_marginRight="17dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
-                android:text="PageView" />
-
-            <Button
-                android:id="@+id/sendPageViewEventButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="17dp"
-                android:layout_marginBottom="8dp"
-                android:minWidth="130dp"
-                android:text="Send" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="17dp"
-                android:layout_marginBottom="8dp"
-                android:layout_weight="1"
                 android:text="Search" />
 
             <Button

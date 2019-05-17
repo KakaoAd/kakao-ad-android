@@ -108,7 +108,6 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
 | 앱 설치 | AppInstall | O |
 | 앱 실행 | AppLaunch | O |
 | 가입 | CompleteRegistration  | X |
-| 화면 방문 | PageView | X |
 | 검색 | Search | X |
 | 콘텐츠/상품 조회 | ViewContent | X |
 | 장바구니 보기 | ViewCart | X |
@@ -157,22 +156,6 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
 * Java
     ```java
     CompleteRegistration event = new CompleteRegistration();
-    event.tag = "Tag"; // 분류
-    KakaoAdTracker.getInstance().sendEvent(event);
-    ```
-
-#### 페이지 방문
-
-* Kotlin
-    ```kotlin
-    val event = PageView()
-    event.tag = "Tag" // 분류
-    event.send()
-    ```
-
-* Java
-    ```java
-    PageView event = new PageView();
     event.tag = "Tag"; // 분류
     KakaoAdTracker.getInstance().sendEvent(event);
     ```
