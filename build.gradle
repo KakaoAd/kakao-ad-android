@@ -1,7 +1,7 @@
 buildscript {
     ext.kakaoad_tracker_version = '0.3.2' // 최신 버전 사용을 권장합니다.
 
-    ext.kotlin_version = '1.3.31' // 최신 버전 사용을 권장합니다.
+    ext.kotlin_version = '1.3.41' // 최신 버전 사용을 권장합니다.
     ext.play_service_version = '16.0.0' // 최신 버전 사용을 권장합니다.
 
     repositories {
