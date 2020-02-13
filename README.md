@@ -37,6 +37,7 @@ Kakao AD SDK를 추가하는 방법은 다음과 같습니다.
     dependencies {
         implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
         implementation "com.google.android.gms:play-services-ads-identifier:$play_service_version"
+        implementation "com.android.installreferrer:installreferrer:$install_referrer_version"
 
         implementation "com.kakao.ad:tracker:$kakao_ad_tracker_version"
     }
@@ -64,36 +65,12 @@ Kakao AD SDK를 초기화 하기 위한 정보를 설정하는 방법은 다음�
     </application>
     ```
 
-3. `com.android.vending.INSTALL_REFERRER` 정보를 Kakao AD SDK의 `KakaoAdInstallReferrerReceiver`외에
-다른 `BroadcastReceiver`에 전달하기 위해서는 추가 설정이 필요합니다.<br/>
-[`AndroidManifest.xml`](app/src/main/AndroidManifest.xml) 파일에 `KakaoAdInstallReferrerReceiver`를 추가합니다.<br/>
-`KakaoAdInstallReferrerReceiver`는 다른 `BroadcastReceiver`보다 **먼저 추가해야 합니다!!!**<br/>
-`KakaoAdInstallReferrerReceiver`의 `<receiver>` 태그 하위에 `<meta-data>`를 추가합니다.<br/>
-`<meta-data>`의 `name`은 전달이 필요한 `BroadcastReceiver`의 별칭을 사용하고, `value`는 클래스명을 사용합니다.
-
-    ```xml
-    <!-- "KakaoAdInstallReferrerReceiver"를 BroadcastReceiver 중 가장 먼저 추가!!! -->
-    <receiver
-        android:name="com.kakao.ad.tracker.KakaoAdInstallReferrerReceiver"
-        android:exported="true">
-        <intent-filter>
-            <action android:name="com.android.vending.INSTALL_REFERRER" />
-        </intent-filter>
-
-        <!-- "com.android.vending.INSTALL_REFERRER"를 수신할 BroadcastReceiver 추가 -->
-        <meta-data
-            android:name="receiver1"
-            android:value="com.kakao.ad.tracker.sample.receiver.InstallReferrerReceiver1" />
-
-        <!-- "com.android.vending.INSTALL_REFERRER"를 수신할 BroadcastReceiver 추가 -->
-        <meta-data
-            android:name="receiver2"
-            android:value="com.kakao.ad.tracker.sample.receiver.InstallReferrerReceiver2" />
-    </receiver>
-    ```
-
-* `<meta-data>`에 등록된 `BroadcastReceiver`는 `AndroidManifest.xml`에 `receiver`로 추가하지 않아도 `com.android.vending.INSTALL_REFERRER` 정보를 수신할 수 있습니다.
-* `BroadcastReceiver`를 `AndroidManifest.xml`에 추가할 경우, 반드시 `KakaoAdInstallReferrerReceiver`를 추가한 다음 `BroadcastReceiver`를 추가해야 합니다.
+3. ~`com.android.vending.INSTALL_REFERRER` 정보를 Kakao AD SDK의 `KakaoAdInstallReferrerReceiver`외에
+다른 `BroadcastReceiver`에 전달하기 위해서는 추가 설정이 필요합니다.~<br/>
+`BroadcastReceiver`를 통해 Referrer 수집하는 방식은
+[2020년 3월 1일부로 지원 중단](https://android-developers.googleblog.com/2019/11/still-using-installbroadcast-switch-to.html)됨에 따라,<br/>
+`KakaoAdInstallReferrerReceiver`는 더 이상 사용되지 않으며, 다른 방식으로 대체되었습니다.</br>
+`KakaoAdInstallReferrerReceiver`는 추후 제거될 예정입니다.</br>
 
 
 ## 이벤트 수집하기
