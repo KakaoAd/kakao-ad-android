@@ -29,43 +29,5 @@
         <activity android:name=".activity.BillingLibTestActivity" />
 
         <activity android:name=".activity.BillingAidlTestActivity" />
-
-        <!-- "com.android.vending.INSTALL_REFERRER" 수신을 위한 BroadcastReceiver 추가 -->
-        <!-- "KakaoAdInstallReferrerReceiver"를 BroadcastReceiver 중 가장 먼저 추가!!! -->
-        <receiver
-            android:name="com.kakao.ad.tracker.KakaoAdInstallReferrerReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER" />
-            </intent-filter>
-
-            <!-- "com.android.vending.INSTALL_REFERRER"를 수신할 BroadcastReceiver 추가 -->
-            <meta-data
-                android:name="receiver1"
-                android:value="com.kakao.ad.tracker.sample.receiver.InstallReferrerReceiver1" />
-
-            <!-- "com.android.vending.INSTALL_REFERRER"를 수신할 BroadcastReceiver 추가 -->
-            <meta-data
-                android:name="receiver2"
-                android:value="com.kakao.ad.tracker.sample.receiver.InstallReferrerReceiver2" />
-        </receiver>
-
-        <!-- 샘플 BroadcastReceiver :: 추가하지 않아도 "KakaoAdInstallReferrerReceiver"에 의해 이벤트 전달됨 -->
-        <!--<receiver-->
-            <!--android:name=".receiver.InstallReferrerReceiver1"-->
-            <!--android:enabled="true">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="com.android.vending.INSTALL_REFERRER" />-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
-
-        <!-- 샘플 BroadcastReceiver :: 추가가 필요하다면 "KakaoAdInstallReferrerReceiver" 추가한 다음 추가해야 함!!! -->
-        <receiver
-            android:name=".receiver.InstallReferrerReceiver2"
-            android:enabled="true">
-            <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER" />
-            </intent-filter>
-        </receiver>
     </application>
 </manifest>
