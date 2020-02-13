@@ -25,15 +25,16 @@ android {
 }
 
 dependencies {
-    // required
+    // required :: SDK 사용을 위해 필수로 사용해야하는 의존성
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.google.android.gms:play-services-ads-identifier:$play_service_version"
+    implementation "com.android.installreferrer:installreferrer:$install_referrer_version"
     implementation "com.kakao.ad:tracker:$kakaoad_tracker_version"
 
-    // optional :: 빌링 라이브러리를 사용하는 경우 required
-    implementation 'com.android.billingclient:billing:1.2.2'
+    // optional :: 인앱 구매를 사용할 경우(인앱 구매 정보를 수집할 경우), 필요한 의존성
+    implementation "com.android.billingclient:billing:$billing_version"
 
-    // optional
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    // optional :: 샘플 구현을 위해 사용한 의존성 (앱에서 사용하지 않을 경우, 제외 가능)
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 }
