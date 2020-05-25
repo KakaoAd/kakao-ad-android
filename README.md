@@ -84,12 +84,14 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
 |---|---|---|
 | 앱 설치 | AppInstall | O |
 | 앱 실행 | AppLaunch | O |
-| 가입 | CompleteRegistration  | X |
+| 가입완료 | CompleteRegistration  | X |
 | 검색 | Search | X |
 | 콘텐츠/상품 조회 | ViewContent | X |
 | 장바구니 보기 | ViewCart | X |
 | 구매 | Purchase | X |
 | 인앱 구매 | InAppPurchase | X |
+| 잠재고객 | Participation | X |
+| 가입 및 등록 | SignUp | X |
 
 
 ### KakaoAdTracker 초기화 하기
@@ -351,6 +353,55 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     KakaoAdTracker.getInstance().sendEvent(event);
     ```
 
+#### 잠재고객
+
+* 잠재고객(Participation) 이벤트는 아래 태그를 추가 설정하면 전환을 최적화하는데 도움이 됩니다.
+    | 권장 태그 추가 목적 | 태그값 |
+    |-----------------|-------|
+    | 사전예약 | PreBooking  |
+    | 상담신청 | Consulting  |
+    | 시승신청 | DrivingTest |
+    | 대출한도조회 | LoanLimitCheck |
+    | 보험료조회 | InsuranceCheck |
+
+* Kotlin 
+    ```kotlin
+    val event = Participation()
+    event.tag = "Tag" // 분류
+    event.send()
+    ```
+
+* Java
+    ```java
+    Participation event = new Participation();
+    event.tag = "Tag"; // 분류
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```
+
+#### 가입 및 등록
+
+* 가입 및 등록(SignUp) 이벤트는 아래 태그를 추가 설정하면 전환을 최적화하는데 도움이 됩니다.
+    | 권장 태그 추가 목적 | 태그값 |
+    |-----------------|-------|
+    | 서비스가입 | SignUp |
+    | 구독완료 | Subscription |
+    | 카드발급 | CardIssuance |
+    | 계좌개설 | OpeningAccount |
+    | 대출신청 | LoanApplication |
+
+* Kotlin 
+    ```kotlin
+    val event = SignUp()
+    event.tag = "Tag" // 분류
+    event.send()
+    ```
+
+* Java
+    ```java
+    SignUp event = new SignUp();
+    event.tag = "Tag"; // 분류
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```
 
 ## License
 
