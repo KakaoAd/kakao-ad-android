@@ -8,24 +8,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:minHeight="20dp" />
+        android:orientation="vertical"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="17dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="17dp"
             android:layout_marginBottom="8dp"
-            android:layout_weight="3"
             android:gravity="center"
             android:text="Kakao AD Tracker Sample"
             android:textSize="24sp" />
@@ -212,6 +207,62 @@
                 android:layout_marginRight="17dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
+                android:text="Participation" />
+
+            <Button
+                android:id="@+id/sendParticipationEventButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:minWidth="130dp"
+                android:text="Send" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:text="SignUp" />
+
+            <Button
+                android:id="@+id/sendSignUpEventButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:minWidth="130dp"
+                android:text="Send" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
                 android:text="InAppPurchase\n(use Billing library)" />
 
             <Button
@@ -253,11 +304,5 @@
                 android:minWidth="130dp"
                 android:text="Start" />
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5"
-            android:minHeight="20dp" />
     </LinearLayout>
 </ScrollView>

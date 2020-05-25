@@ -5,9 +5,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.kakao.ad.common.json.CompleteRegistration
 import com.kakao.ad.common.json.InAppPurchase
+import com.kakao.ad.common.json.Participation
 import com.kakao.ad.common.json.Product
 import com.kakao.ad.common.json.Purchase
 import com.kakao.ad.common.json.Search
+import com.kakao.ad.common.json.SignUp
 import com.kakao.ad.common.json.ViewCart
 import com.kakao.ad.common.json.ViewContent
 import com.kakao.ad.tracker.KakaoAdTracker
@@ -16,8 +18,10 @@ import com.kakao.ad.tracker.sample.util.logAndToast
 import com.kakao.ad.tracker.send
 import kotlinx.android.synthetic.main.activity_main_sample.sendCompleteRegistrationEventButton
 import kotlinx.android.synthetic.main.activity_main_sample.sendInAppPurchaseEventButton
+import kotlinx.android.synthetic.main.activity_main_sample.sendParticipationEventButton
 import kotlinx.android.synthetic.main.activity_main_sample.sendPurchaseEventButton
 import kotlinx.android.synthetic.main.activity_main_sample.sendSearchEventButton
+import kotlinx.android.synthetic.main.activity_main_sample.sendSignUpEventButton
 import kotlinx.android.synthetic.main.activity_main_sample.sendViewCartEventButton
 import kotlinx.android.synthetic.main.activity_main_sample.sendViewContentEventButton
 import kotlinx.android.synthetic.main.activity_main_sample.startInAppBillingAidlTestButton
@@ -47,6 +51,8 @@ class MainSampleActivity : AppCompatActivity() {
         sendViewCartEventButton.setOnClickListener { sendViewCartEvent() }
         sendPurchaseEventButton.setOnClickListener { sendPurchaseEvent() }
         sendInAppPurchaseEventButton.setOnClickListener { sendInAppPurchaseEvent() }
+        sendParticipationEventButton.setOnClickListener { sendParticipationEvent() }
+        sendSignUpEventButton.setOnClickListener { sendSignUpEvent() }
         startInAppBillingLibTestButton.setOnClickListener {
             startActivity(Intent(it.context, BillingLibTestActivity::class.java))
         }
@@ -56,7 +62,7 @@ class MainSampleActivity : AppCompatActivity() {
     }
 
     /**
-     * 가입 이밴트(CompleteRegistration)를 전송합니다.
+     * 가입완료 이밴트(CompleteRegistration)를 전송합니다.
      */
     fun sendCompleteRegistrationEvent() {
         val event = CompleteRegistration()
@@ -140,6 +146,42 @@ class MainSampleActivity : AppCompatActivity() {
         event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)
         event.total_quantity = event.products?.sumBy { it.quantity } // 총 개수
         event.total_price = event.products?.sumByDouble { it.price } // 총 금액
+        event.send()
+    }
+
+    /**
+     * 잠재고객 이벤트(Participation)를 전송합니다.
+     *
+     * 잠재고객([Participation]) 이벤트는 아래 태그([Participation.tag])를 추가 설정하면 전환을 최적화하는데 도움이 됩니다.
+     *
+     * 권장 태그 추가 목적 (태그값):
+     * - 사전예약 (PreBooking)
+     * - 상담신청 (Consulting)
+     * - 시승신청 (DrivingTest)
+     * - 대출한도조회 (LoanLimitCheck)
+     * - 보험료조회 (InsuranceCheck)
+     */
+    fun sendParticipationEvent() {
+        val event = Participation()
+        event.tag = "Tag" // 분류
+        event.send()
+    }
+
+    /**
+     * 가입 및 등록 이벤트(SignUp)를 전송합니다.
+     *
+     * 가입 및 등록([SignUp]) 이벤트는 아래 태그([SignUp.tag])를 추가 설정하면 전환을 최적화하는데 도움이 됩니다.
+     *
+     * 권장 태그 추가 목적 (태그값):
+     * - 서비스가입 (SignUp)
+     * - 구독완료 (Subscription)
+     * - 카드발급 (CardIssuance)
+     * - 계좌개설 (OpeningAccount)
+     * - 대출신청 (LoanApplication)
+     */
+    fun sendSignUpEvent() {
+        val event = SignUp()
+        event.tag = "Tag" // 분류
         event.send()
     }
 }
