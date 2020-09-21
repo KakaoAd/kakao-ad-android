@@ -80,18 +80,20 @@ Kakao AD SDK를 초기화 하기 위한 정보를 설정하는 방법은 다음�
 Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
 앱 설치 이벤트(AppInstall)와 실행 이벤트(AppLaunch)는 `KakaoAdTracker`를 초기화하는 시점에 자동적으로 수집됩니다.
 
-| 이벤트 | 클래스| 자동 수집 유무 |
-|---|---|---|
-| 앱 설치 | AppInstall | O |
-| 앱 실행 | AppLaunch | O |
-| 가입완료 | CompleteRegistration  | X |
-| 검색 | Search | X |
-| 콘텐츠/상품 조회 | ViewContent | X |
-| 장바구니 보기 | ViewCart | X |
-| 구매 | Purchase | X |
-| 인앱 구매 | InAppPurchase | X |
-| 잠재고객 | Participation | X |
-| 가입 및 등록 | SignUp | X |
+| 이벤트 | 클래스 | 자동 수집 유무 | 프로퍼티 |
+|---|---|---|---|
+| 앱 설치 | AppInstall | O | tag : 분류 |
+| 앱 실행 | AppLaunch | O | tag : 분류 |
+| 가입완료 | CompleteRegistration  | X | tag : 분류 |
+| 검색 | Search | X | tag : 분류 , search_string : 검색 문자열 |
+| 콘텐츠/상품 조회 | ViewContent | X | tag : 분류, content_id : 상품 코드 |
+| 장바구니 추가 | AddToCart | X | tag : 분류, content_id : 상품 코드 |
+| 관심상품 추가 | AddToWishList | X | tag : 분류, content_id : 상품 코드 |
+| 장바구니 보기 | ViewCart | X | tag : 분류 |
+| 구매 | Purchase | X | tag : 분류, total_quantity : 총 주문 수량, total_price : 총 주문 금액, currency : 통화 코드, products : 구매 물품별 정보 | 
+| 인앱 구매 | InAppPurchase | X | tag : 분류, total_quantity : 총 주문 수량, total_price : 총 주문 금액, currency : 통화 코드, products : 구매 물품별 정보 |
+| 잠재고객 | Participation | X | tag : 분류 |
+| 가입 및 등록 | SignUp | X | tag : 분류 |
 
 
 ### KakaoAdTracker 초기화 하기
@@ -174,6 +176,42 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.content_id = "Content ID"; // 상품 코드
     KakaoAdTracker.getInstance().sendEvent(event);
     ```
+
+#### 장바구니 추가
+
+* Kotlin
+    ```kotlin
+    val event = AddToCart()
+    event.tag = "Tag" // 분류
+    event.content_id = "Content ID"; // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
+    event.send()
+    ```
+
+* Java
+    ```java
+    ViewCart event = new AddToCart();
+    event.tag = "Tag"; // 분류
+    event.content_id = "Content ID"; // 상품 코드 , 상품 코드값이 필수로 포함되어야 합니다.
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```
+
+#### 관심상품 추가
+
+* Kotlin
+    ```kotlin
+    val event = AddToWishList()
+    event.tag = "Tag" // 분류
+    event.content_id = "Content ID"; // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
+    event.send()
+    ```
+
+* Java
+    ```java
+    ViewCart event = new AddToWishList();
+    event.tag = "Tag"; // 분류
+    event.content_id = "Content ID"; // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```  
 
 #### 장바구니 보기
 

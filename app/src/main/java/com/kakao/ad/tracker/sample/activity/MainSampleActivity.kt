@@ -3,29 +3,12 @@ package com.kakao.ad.tracker.sample.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.kakao.ad.common.json.CompleteRegistration
-import com.kakao.ad.common.json.InAppPurchase
-import com.kakao.ad.common.json.Participation
-import com.kakao.ad.common.json.Product
-import com.kakao.ad.common.json.Purchase
-import com.kakao.ad.common.json.Search
-import com.kakao.ad.common.json.SignUp
-import com.kakao.ad.common.json.ViewCart
-import com.kakao.ad.common.json.ViewContent
+import com.kakao.ad.common.json.*
 import com.kakao.ad.tracker.KakaoAdTracker
 import com.kakao.ad.tracker.sample.R
 import com.kakao.ad.tracker.sample.util.logAndToast
 import com.kakao.ad.tracker.send
-import kotlinx.android.synthetic.main.activity_main_sample.sendCompleteRegistrationEventButton
-import kotlinx.android.synthetic.main.activity_main_sample.sendInAppPurchaseEventButton
-import kotlinx.android.synthetic.main.activity_main_sample.sendParticipationEventButton
-import kotlinx.android.synthetic.main.activity_main_sample.sendPurchaseEventButton
-import kotlinx.android.synthetic.main.activity_main_sample.sendSearchEventButton
-import kotlinx.android.synthetic.main.activity_main_sample.sendSignUpEventButton
-import kotlinx.android.synthetic.main.activity_main_sample.sendViewCartEventButton
-import kotlinx.android.synthetic.main.activity_main_sample.sendViewContentEventButton
-import kotlinx.android.synthetic.main.activity_main_sample.startInAppBillingAidlTestButton
-import kotlinx.android.synthetic.main.activity_main_sample.startInAppBillingLibTestButton
+import kotlinx.android.synthetic.main.activity_main_sample.*
 import java.util.Currency
 import java.util.Locale
 
@@ -49,6 +32,8 @@ class MainSampleActivity : AppCompatActivity() {
         sendSearchEventButton.setOnClickListener { sendSearchEvent() }
         sendViewContentEventButton.setOnClickListener { sendViewContentEvent() }
         sendViewCartEventButton.setOnClickListener { sendViewCartEvent() }
+        sendAddToCartEventButton.setOnClickListener { sendAddToCartEvent() }
+        sendAddToWishListEventButton.setOnClickListener { sendAddToWishListEvent() }
         sendPurchaseEventButton.setOnClickListener { sendPurchaseEvent() }
         sendInAppPurchaseEventButton.setOnClickListener { sendInAppPurchaseEvent() }
         sendParticipationEventButton.setOnClickListener { sendParticipationEvent() }
@@ -96,6 +81,26 @@ class MainSampleActivity : AppCompatActivity() {
     fun sendViewCartEvent() {
         val event = ViewCart()
         event.tag = "Tag" // 분류
+        event.send()
+    }
+
+    /**
+     * 장바구니 추가 이벤트(장바구니추가))를 전송합니다.
+     */
+    fun sendAddToCartEvent() {
+        val event = AddToCart()
+        event.tag = "Tag" // 분류
+        event.content_id = "Content ID" // 상품 코드
+        event.send()
+    }
+
+    /**
+     * 관심상품 추가 이벤트(AddToWishlist)를 전송합니다.
+     */
+    fun sendAddToWishListEvent() {
+        val event = AddToWishList()
+        event.tag = "Tag" // 분류
+        event.content_id = "Content ID" // 상품 코드
         event.send()
     }
 
