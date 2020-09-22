@@ -90,7 +90,7 @@ class MainSampleActivity : AppCompatActivity() {
     fun sendAddToCartEvent() {
         val event = AddToCart()
         event.tag = "Tag" // 분류
-        event.content_id = "Content ID" // 상품 코드
+        event.content_id = "Content ID" // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
         event.send()
     }
 
@@ -100,7 +100,7 @@ class MainSampleActivity : AppCompatActivity() {
     fun sendAddToWishListEvent() {
         val event = AddToWishList()
         event.tag = "Tag" // 분류
-        event.content_id = "Content ID" // 상품 코드
+        event.content_id = "Content ID" // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
         event.send()
     }
 
