@@ -183,7 +183,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     ```kotlin
     val event = AddToCart()
     event.tag = "Tag" // 분류
-    event.content_id = "Content ID"; // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
+    event.content_id = "Content ID" // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
     event.send()
     ```
 
