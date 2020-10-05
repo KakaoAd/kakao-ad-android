@@ -333,7 +333,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     ```java
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == REQUEST_CODE_BILLING && data != null) {
+        if (requestCode == REQUEST_CODE_BILLING && data != null) {
             KakaoAdTracker.getInstance().sendInAppBillingResult(data);
         }
     }
