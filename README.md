@@ -26,7 +26,7 @@ Kakao AD SDK를 추가하는 방법은 다음과 같습니다.
         repositories {
             google()
             jcenter()
-            maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
+            maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
         }
     }
     ```
