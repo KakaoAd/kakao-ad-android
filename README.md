@@ -9,7 +9,7 @@
 
 ### 트랙 ID(Track ID) 발급받기
 Kakao AD SDK를 이용하기 위해서는 먼저 고유한 식별값인 트랙 ID(Track Id)가 필요합니다.<br/>
-Track ID는 [https://moment.kakao.com](https://moment.kakao.com/login) 에서 회원 가입 후, [https://moment.kakao.com/mypixel](https://moment.kakao.com/mypixel) 페이지에서 발급 받을 수 있습니다.
+Track ID는 [https://business.kakao.com](https://business.kakao.com/login) 에서 회원 가입 후, [https://business.kakao.com/pixel](https://business.kakao.com/pixel) 페이지에서 발급 받을 수 있습니다.
 Track ID 발급이 완료된 후, 다음 단계의 안내에 따라 Kakao AD SDK를 설치해주세요.
 
 ### build.gradle 설정하기
@@ -444,7 +444,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
 ## License
 
 ```
-Copyright 2017 © Kakao Corp. All Rights Reserved.
+Copyright 2022 © Kakao Corp. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
