@@ -241,11 +241,13 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.products = // 구매 상품 목록
         listOf(
             Product().also { product ->
+                product.id = "P0001" // 상품 ID
                 product.name = "Product 1" // 상품명
                 product.quantity = 1 // 개수
                 product.price = 1.1 // 금액
             },
             Product().also { product ->
+                product.id = "P0002" // 상품 ID
                 product.name = "Product 2" // 상품명
                 product.quantity = 2 // 개수
                 product.price = 2.2 // 금액
@@ -260,11 +262,13 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
 * Java
     ```java
     Product product1 = new Product(); // 상품
+    product1.id = "P0001"; // 상품 ID
     product1.name = "Product 1"; // 상품명
     product1.quantity = 1; // 개수
     product1.price = 1.1; // 금액
 
     Product product2 = new Product(); // 상품
+    product2.id = "P0002"; // 상품 ID
     product2.name = "Product 2"; // 상품명
     product2.quantity = 2; // 개수
     product2.price = 2.2; // 금액
@@ -350,11 +354,13 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.products = // 구매 상품 목록
         listOf(
             Product().also { product ->
+                product.id = "P0001" // 상품 ID
                 product.name = "Product 1" // 상품명
                 product.quantity = 1 // 개수
                 product.price = 1.1 // 금액
             },
             Product().also { product ->
+                product.id = "P0002" // 상품 ID
                 product.name = "Product 2" // 상품명
                 product.quantity = 2 // 개수
                 product.price = 2.2 // 금액
@@ -368,11 +374,13 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
 * Java
     ```java
     Product product1 = new Product();
+    product1.id = "P0001"; // 상품 ID
     product1.name = "Product 1"; // 상품명
     product1.quantity = 1; // 개수
     product1.price = 1.1; // 금액
 
     Product product2 = new Product();
+    product2.id = "P0002"; // 상품 ID
     product2.name = "Product 2"; // 상품명
     product2.quantity = 2; // 개수
     product2.price = 2.2; // 금액

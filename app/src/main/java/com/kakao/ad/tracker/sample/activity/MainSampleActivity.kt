@@ -113,19 +113,21 @@ class MainSampleActivity : AppCompatActivity() {
         event.products = // 구매 상품 목록
             listOf(
                 Product().also { product ->
+                    product.id = "P0001" // 상품 ID
                     product.name = "Product 1" // 상품명
                     product.quantity = 1 // 개수
                     product.price = 1.1 // 금액
                 },
                 Product().also { product ->
+                    product.id = "P0002" // 상품 ID
                     product.name = "Product 2" // 상품명
                     product.quantity = 2 // 개수
                     product.price = 2.2 // 금액
                 }
             )
         event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)
-        event.total_quantity = event.products?.sumBy { it.quantity } // 총 개수
-        event.total_price = event.products?.sumByDouble { it.price } // 총 금액
+        event.total_quantity = event.products?.sumOf { it.quantity } // 총 개수
+        event.total_price = event.products?.sumOf { it.price } // 총 금액
         event.send()
     }
 
@@ -138,19 +140,21 @@ class MainSampleActivity : AppCompatActivity() {
         event.products = // 구매 상품 목록
             listOf(
                 Product().also { product ->
+                    product.id = "P0001" // 상품 ID
                     product.name = "Product 1" // 상품명
                     product.quantity = 1 // 개수
                     product.price = 1.1 // 금액
                 },
                 Product().also { product ->
+                    product.id = "P0002" // 상품 ID
                     product.name = "Product 2" // 상품명
                     product.quantity = 2 // 개수
                     product.price = 2.2 // 금액
                 }
             )
         event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)
-        event.total_quantity = event.products?.sumBy { it.quantity } // 총 개수
-        event.total_price = event.products?.sumByDouble { it.price } // 총 금액
+        event.total_quantity = event.products?.sumOf { it.quantity } // 총 개수
+        event.total_price = event.products?.sumOf { it.price } // 총 금액
         event.send()
     }
 
