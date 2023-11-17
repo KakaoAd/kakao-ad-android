@@ -44,6 +44,10 @@ class MainSampleActivity : AppCompatActivity() {
         startInAppBillingAidlTestButton.setOnClickListener {
             startActivity(Intent(it.context, BillingAidlTestActivity::class.java))
         }
+        sendLoginEventButton.setOnClickListener { sendLoginEvent() }
+        sendPreparationEventButton.setOnClickListener { sendPreparationEvent() }
+        sendTutorialEventButton.setOnClickListener { sendTutorialEvent() }
+        sendMissionCompleteEventButton.setOnClickListener { sendMissionCompleteEvent() }
     }
 
     /**
@@ -191,6 +195,42 @@ class MainSampleActivity : AppCompatActivity() {
     fun sendSignUpEvent() {
         val event = SignUp()
         event.tag = "Tag" // 분류
+        event.send()
+    }
+
+    /**
+     * 로그인 (Login) 이벤트를 전송합니다.
+     */
+    fun sendLoginEvent() {
+        val event = Login()
+        event.tag = "Tag"
+        event.send()
+    }
+
+    /**
+     * 사전준비(Preparation) 이벤트를 전송합니다.
+     */
+    fun sendPreparationEvent() {
+        val event = Preparation()
+        event.tag = "Tag"
+        event.send()
+    }
+
+    /**
+     * 튜토리얼(Tutorial) 이벤트를 전송합니다.
+     */
+    fun sendTutorialEvent() {
+        val event = Tutorial()
+        event.tag = "Tag"
+        event.send()
+    }
+
+    /**
+     * 미션완료(Mission Complete) 이벤트를 전송합니다.
+     */
+    fun sendMissionCompleteEvent() {
+        val event = MissionComplete()
+        event.tag = "Tag"
         event.send()
     }
 }

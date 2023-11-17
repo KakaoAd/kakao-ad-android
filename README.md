@@ -4,7 +4,7 @@
 * 최신 버전의 Kakao AD SDK 사용을 권장합니다.
 * 최신 버전의 [Android Studio](https://developer.android.com/studio/) 사용을 권장합니다. Eclipse에 대한 기술 지원은 하지 않습니다.
 * 최신 버전의 [Kotlin](https://developer.android.com/kotlin/) 사용을 권장합니다.
-* Kakao AD SDK는 [Android 4.0(Ice Cream Sandwich, API Level 14)](https://developer.android.com/about/versions/android-4.0) 이상 기기에서 동작합니다.
+* Kakao AD SDK는 [Android 5.0(LolliPop, API Level 21)](https://developer.android.com/about/versions/android-5.0) 이상 기기에서 동작합니다.
 
 
 ### 트랙 ID(Track ID) 발급받기
@@ -38,7 +38,7 @@ Kakao AD SDK를 추가하는 방법은 다음과 같습니다.
 
     ```gradle
     dependencies {
-        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
         implementation "com.google.android.gms:play-services-ads-identifier:$play_service_version"
         implementation "com.android.installreferrer:installreferrer:$install_referrer_version"
 
@@ -97,6 +97,10 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
 | 인앱 구매 | InAppPurchase | X | tag : 분류, total_quantity : 총 주문 수량, total_price : 총 주문 금액, currency : 통화 코드, products : 구매 물품별 정보 |
 | 잠재고객 | Participation | X | tag : 분류 |
 | 서비스신청 | SignUp | X | tag : 분류 |
+| 로그인 | Login | x | tag : 분류 |
+| 사전참여 | Preparation | x | tag : 분류 |
+| 튜토리얼 | Tutorial | x | tag : 분류 |
+| 목표달성 | MissionComplete | x | tag : 분류 |
 
 
 ### KakaoAdTracker 초기화 하기
@@ -451,11 +455,74 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.tag = "Tag"; // 분류
     KakaoAdTracker.getInstance().sendEvent(event);
     ```
+### 로그인
+
+* Kotlin
+    ```kotlin
+    val event = Login()
+    event.tag = "Tag" // 분류
+    event.send()
+    ```
+
+* Java
+    ```java
+    Login event = new Login();
+    event.tag = "Tag"; // 분류
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```
+
+### 사전참여
+
+* Kotlin
+    ```kotlin
+    val event = Preparation()
+    event.tag = "Tag" // 분류
+    event.send()
+    ```
+
+* Java
+    ```java
+    Preparation event = new Preparation();
+    event.tag = "Tag"; // 분류
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```
+
+### 튜토리얼
+
+* Kotlin
+    ```kotlin
+    val event = Tutorial()
+    event.tag = "Tag" // 분류
+    event.send()
+    ```
+
+* Java
+    ```java
+    Tutorial event = new Tutorial();
+    event.tag = "Tag"; // 분류
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```
+
+### 목표달성
+
+* Kotlin
+    ```kotlin
+    val event = MissionComplete()
+    event.tag = "Tag" // 분류
+    event.send()
+    ```
+
+* Java
+    ```java
+    MissionComplete event = new MissionComplete();
+    event.tag = "Tag"; // 분류
+    KakaoAdTracker.getInstance().sendEvent(event);
+    ```
 
 ## License
 
 ```
-Copyright 2022 © Kakao Corp. All Rights Reserved.
+Copyright 2023 © Kakao Corp. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
