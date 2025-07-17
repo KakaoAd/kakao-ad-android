@@ -28,7 +28,7 @@ Kakao AD SDK를 추가하는 방법은 다음과 같습니다.
     allprojects {
         repositories {
             google()
-            jcenter()
+            mavenCentral()
             maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
         }
     }
@@ -41,7 +41,8 @@ Kakao AD SDK를 추가하는 방법은 다음과 같습니다.
         implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
         implementation "com.google.android.gms:play-services-ads-identifier:$play_service_version"
         implementation "com.android.installreferrer:installreferrer:$install_referrer_version"
-
+        implementation "com.android.billingclient:billing:6.0.1"
+        implementation "com.android.billingclient:billing-ktx:6.0.1"
         implementation "com.kakao.ad:tracker:$kakao_ad_tracker_version"
     }
     ```
@@ -75,6 +76,7 @@ Kakao AD SDK를 초기화 하기 위한 정보를 설정하는 방법은 다음�
 `KakaoAdInstallReferrerReceiver`는 더 이상 사용되지 않으며, 다른 방식으로 대체되었습니다.</br>
 `KakaoAdInstallReferrerReceiver`는 추후 제거될 예정입니다.</br>
 
+4. 결제 관련 정보를 처리를 위해 Google Play 결제라이브러리 버전 6이 적용되었습니다. [결제 라이브러리 지원 중단](https://developer.android.com/google/play/billing/deprecation-faq?hl=ko)
 
 ## 이벤트 수집하기
 
@@ -83,25 +85,24 @@ Kakao AD SDK를 초기화 하기 위한 정보를 설정하는 방법은 다음�
 Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
 앱 설치 이벤트(AppInstall)와 실행 이벤트(AppLaunch)는 `KakaoAdTracker`를 초기화하는 시점에 자동적으로 수집됩니다.
 
-| 이벤트 | 클래스 | 자동 수집 유무 | 프로퍼티 |
-|---|---|---|---|
-| 앱 설치 | AppInstall | O | tag : 분류 |
-| 앱 실행 | AppLaunch | O | tag : 분류 |
-| 회원가입 | CompleteRegistration  | X | tag : 분류 |
-| 검색 | Search | X | tag : 분류 , search_string : 검색 문자열 |
-| 콘텐츠/상품 조회 | ViewContent | X | tag : 분류, content_id : 상품 코드 |
-| 장바구니 추가 | AddToCart | X | tag : 분류, content_id : 상품 코드 |
-| 관심상품 추가 | AddToWishList | X | tag : 분류, content_id : 상품 코드 |
-| 장바구니 보기 | ViewCart | X | tag : 분류 |
-| 구매 | Purchase | X | tag : 분류, total_quantity : 총 주문 수량, total_price : 총 주문 금액, currency : 통화 코드, products : 구매 물품별 정보 | 
-| 인앱 구매 | InAppPurchase | X | tag : 분류, total_quantity : 총 주문 수량, total_price : 총 주문 금액, currency : 통화 코드, products : 구매 물품별 정보 |
-| 잠재고객 | Participation | X | tag : 분류 |
-| 서비스신청 | SignUp | X | tag : 분류 |
-| 로그인 | Login | x | tag : 분류 |
-| 사전참여 | Preparation | x | tag : 분류 |
-| 튜토리얼 | Tutorial | x | tag : 분류 |
-| 목표달성 | MissionComplete | x | tag : 분류 |
-
+| 이벤트     | 클래스 | 자동 수집 유무 | 프로퍼티                                                                                                                                                                           | 비고                                        | 
+|---------|---|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| 앱 설치    | AppInstall | O       | tag : 분류                                                                                                                                                                       |                                                          |
+| 앱 실행    | AppLaunch | O       | tag : 분류                                                                                                                                                                       |                                                          |
+| 회원가입    | CompleteRegistration  | X       | tag : 분류                                                                                                                                                                       |                                                          |
+| 검색      | Search | X       | tag : 분류 <br>search_string : 검색 문자열                                                                                                                                            |                                                          |
+| 콘텐츠/상품 조회 | ViewContent | X       | tag : 분류 <br><span style="color:green"> ~~content_id : 상품 코드~~ (deprecated) </span> <br><span style="color:#F5F5F5"> currentcy : 통화 코드 </span> <br> <span style="color:#F5F5F5">products : 구매 물품별 정보 </span> | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 가격 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> |
+| 장바구니 추가 | AddToCart | X       | tag : 분류 <br><span style="color:green"> ~~content_id : 상품 코드~~ (deprecated) </span> <br><span style="color:#F5F5F5"> currentcy : 통화 코드 </span> <br> <span style="color:#F5F5F5">products : 구매 물품별 정보 </span> | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 가격 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> |
+| 관심상품 추가 | AddToWishList | X       | tag : 분류 <br><span style="color:green"> ~~content_id : 상품 코드~~ (deprecated) </span> <br><span style="color:#F5F5F5"> currentcy : 통화 코드 </span> <br> <span style="color:#F5F5F5">products : 구매 물품별 정보 </span> | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 가격 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> |
+| 장바구니 보기 | ViewCart | X       | tag : 분류                                                                                                                                                                       |                                                          |
+| 구매      | Purchase | X       | tag : 분류 <br> total_quantity : 총 주문 수량 <br>total_price : 총 주문 금액 <br>currency : 통화 코드 <br>products : 구매 물품별 정보                                                                 | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 가격 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span>                                                         | 
+| 인앱 구매   | InAppPurchase | X       | tag : 분류 <br> total_quantity : 총 주문 수량 <br>total_price : 총 주문 금액 <br>currency : 통화 코드 <br>products : 구매 물품별 정보                                                                 |                                                          |
+| 잠재고객    | Participation | X       | tag : 분류                                                                                                                                                                       |                                                          |
+| 서비스신청   | SignUp | X       | tag : 분류                                                                                                                                                                       |                                                          |
+| 로그인     | Login | x       | tag : 분류                                                                                                                                                                       |                                                          |
+| 사전참여    | Preparation | x       | tag : 분류                                                                                                                                                                       |                                                          |
+| 튜토리얼    | Tutorial | x       | tag : 분류                                                                                                                                                                       |                                                          |
+| 목표달성    | MissionComplete | x       | tag : 분류                                                                                                                                                                       |                                                          |
 
 ### KakaoAdTracker 초기화 하기
 이벤트를 수집하기 위해서는 `KakaoAdTracker`를 초기화하는 과정이 필요합니다.<br/>
@@ -167,20 +168,57 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     ```
 
 #### 콘텐츠/상품 조회
-
 * Kotlin
     ```kotlin
     val event = ViewContent()
     event.tag = "Tag" // 분류
+    @deprecated
     event.content_id = "Content ID" // 상품 코드
+    @SinceVersion("0.4")
+    event.products =
+          listOf(
+            Product().also { product ->
+                product.id = "C0001" // 상품 ID
+                product.name = "CProduct 1" // 상품명
+                product.quantity = 1 // 개수
+                product.brand = "브랜드1" // 브랜드명
+                product.price = 1.1 // 금액
+            },
+            Product().also { product ->
+                product.id = "C0002" // 상품 ID
+                product.name = "CProduct 2" // 상품명
+                product.brand = "브랜드2" // 브랜드명
+                product.quantity = 2 // 개수
+                product.price = 2.2 // 금액
+            }
+        )
     event.send()
     ```
 
 * Java
     ```java
+    Product product1 = new Product(); // 상품
+    product1.id = "CP0001"; // 상품 ID
+    product1.name = "CProduct 1"; // 상품명
+    product1.quantity = 1; // 개수
+    product1.brand = "브랜드1". // 브랜드명
+    product1.price = 1.1; // 금액
+
+    Product product2 = new Product(); // 상품
+    product2.id = "P0002"; // 상품 ID
+    product2.name = "Product 2"; // 상품명
+    product2.quantity = 2; // 개수
+    product1.brand = "브랜드2"  // 브랜드명
+    product2.price = 2.2; // 금액
+
+    List<Product> products = Arrays.asList(product1, product2); // 조회 상품 목록
+
     ViewContent event = new ViewContent();
     event.tag = "Tag"; // 분류
+    @Deprecated
     event.content_id = "Content ID"; // 상품 코드
+    @SinceVersion("0.4")
+    event.products = products
     KakaoAdTracker.getInstance().sendEvent(event);
     ```
 
@@ -190,15 +228,52 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     ```kotlin
     val event = AddToCart()
     event.tag = "Tag" // 분류
+    @Deprecated
     event.content_id = "Content ID" // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
+    @SinceVersion("0.4")
+    event.product =
+          listOf(
+            Product().also { product ->
+                product.id = "A0001" // 상품 ID
+                product.name = "AProduct 1" // 상품명
+                product.quantity = 1 // 개수
+                product.brand = "브랜드1A" // 브랜드명
+                product.price = 1.1 // 금액
+            },
+            Product().also { product ->
+                product.id = "A0002" // 상품 ID
+                product.name = "AProduct 2" // 상품명
+                product.brand = "브랜드2A" // 브랜드명
+                product.quantity = 2 // 개수
+                product.price = 2.2 // 금액
+            }     
     event.send()
     ```
 
 * Java
     ```java
+    Product product1 = new Product(); // 상품
+    product1.id = "AP0001"; // 상품 ID
+    product1.name = "AProduct 1"; // 상품명
+    product1.quantity = 1; // 개수
+    product1.brand = "브랜드1A". // 브랜드명
+    product1.price = 1.1; // 금액
+
+    Product product2 = new Product(); // 상품
+    product2.id = "A0002"; // 상품 ID
+    product2.name = "AProduct 2"; // 상품명
+    product2.quantity = 2; // 개수
+    product1.brand = "브랜드2A"  // 브랜드명
+    product2.price = 2.2; // 금액
+
+    List<Product> products = Arrays.asList(product1, product2); // 카트 상품 목록
+  
     AddToCart event = new AddToCart();
     event.tag = "Tag"; // 분류
+    @Deprecated
     event.content_id = "Content ID"; // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
+    @SinceVersion("0.4")
+    event.products = products
     KakaoAdTracker.getInstance().sendEvent(event);
     ```
 
@@ -208,15 +283,51 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     ```kotlin
     val event = AddToWishList()
     event.tag = "Tag" // 분류
+    @Deprecated
     event.content_id = "Content ID" // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
+    @SinceVersion("0.4")
+    event.product =
+          listOf(
+            Product().also { product ->
+                product.id = "W0001" // 상품 ID
+                product.name = "WProduct 1" // 상품명
+                product.quantity = 1 // 개수
+                product.brand = "브랜드1W" // 브랜드명
+                product.price = 1.1 // 금액
+            },
+            Product().also { product ->
+                product.id = "W0002" // 상품 ID
+                product.name = "WProduct 2" // 상품명
+                product.brand = "브랜드2W" // 브랜드명
+                product.quantity = 2 // 개수
+                product.price = 2.2 // 금액
+            }       
     event.send()
     ```
 
 * Java
     ```java
+    Product product1 = new Product(); // 상품
+    product1.id = "WP0001"; // 상품 ID
+    product1.name = "WProduct 1"; // 상품명
+    product1.quantity = 1; // 개수
+    product1.brand = "브랜드1W". // 브랜드명
+    product1.price = 1.1; // 금액
+
+    Product product2 = new Product(); // 상품
+    product2.id = "W0002"; // 상품 ID
+    product2.name = "WProduct 2"; // 상품명
+    product2.quantity = 2; // 개수
+    product1.brand = "브랜드2W"  // 브랜드명
+    product2.price = 2.2; // 금액
+
+    List<Product> products = Arrays.asList(product1, product2); // 관심 상품 목록  
     AddToWishList event = new AddToWishList();
     event.tag = "Tag"; // 분류
+    @Deprecated
     event.content_id = "Content ID"; // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
+    @SinceVersion("0.4")
+    event.products = products
     KakaoAdTracker.getInstance().sendEvent(event);
     ```  
 
@@ -248,12 +359,14 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
                 product.id = "P0001" // 상품 ID
                 product.name = "Product 1" // 상품명
                 product.quantity = 1 // 개수
+                product.brand = "브랜드P"
                 product.price = 1.1 // 금액
             },
             Product().also { product ->
                 product.id = "P0002" // 상품 ID
                 product.name = "Product 2" // 상품명
                 product.quantity = 2 // 개수
+                product.brand = "브랜드P"
                 product.price = 2.2 // 금액
             }
         )
@@ -269,12 +382,14 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     product1.id = "P0001"; // 상품 ID
     product1.name = "Product 1"; // 상품명
     product1.quantity = 1; // 개수
+    product1.brand = "브랜드P"
     product1.price = 1.1; // 금액
 
     Product product2 = new Product(); // 상품
     product2.id = "P0002"; // 상품 ID
     product2.name = "Product 2"; // 상품명
     product2.quantity = 2; // 개수
+    product2.brand = "브랜드P"
     product2.price = 2.2; // 금액
 
     List<Product> products = Arrays.asList(product1, product2); // 구매 상품 목록
@@ -328,7 +443,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
             .build();
     ```
 
-2. [Billing Service AIDL](https://developer.android.com/google/play/billing/billing_library_overview)을 사용하는 경우
+~~2. [Billing Service AIDL](https://developer.android.com/google/play/billing/billing_library_overview)을 사용하는 경우~~ 
 * 인앱 구매 요청 후, `onActivityResult()`에서 `KakaoAdTracker.sendInAppBillingResult()` 호출
 * Kotlin
     ```kotlin
