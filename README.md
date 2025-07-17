@@ -76,7 +76,7 @@ Kakao AD SDK를 초기화 하기 위한 정보를 설정하는 방법은 다음�
 `KakaoAdInstallReferrerReceiver`는 더 이상 사용되지 않으며, 다른 방식으로 대체되었습니다.</br>
 `KakaoAdInstallReferrerReceiver`는 추후 제거될 예정입니다.</br>
 
-4. 결제 관련 정보를 처리를 위해 Google Play 결제라이브러리 버전 6이 적용되었습니다. [결제 라이브러리 지원 중단](https://developer.android.com/google/play/billing/deprecation-faq?hl=ko)
+1. 결제 관련 정보를 처리를 위해 Google Play 결제라이브러리 버전 6이 적용되었습니다. 
 
 ## 이벤트 수집하기
 
@@ -174,7 +174,6 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.tag = "Tag" // 분류
     @deprecated
     event.content_id = "Content ID" // 상품 코드
-    @SinceVersion("0.4")
     event.products =
           listOf(
             Product().also { product ->
@@ -217,7 +216,6 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.tag = "Tag"; // 분류
     @Deprecated
     event.content_id = "Content ID"; // 상품 코드
-    @SinceVersion("0.4")
     event.products = products
     KakaoAdTracker.getInstance().sendEvent(event);
     ```
@@ -230,7 +228,6 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.tag = "Tag" // 분류
     @Deprecated
     event.content_id = "Content ID" // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
-    @SinceVersion("0.4")
     event.product =
           listOf(
             Product().also { product ->
@@ -272,7 +269,6 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.tag = "Tag"; // 분류
     @Deprecated
     event.content_id = "Content ID"; // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
-    @SinceVersion("0.4")
     event.products = products
     KakaoAdTracker.getInstance().sendEvent(event);
     ```
@@ -285,7 +281,6 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.tag = "Tag" // 분류
     @Deprecated
     event.content_id = "Content ID" // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
-    @SinceVersion("0.4")
     event.product =
           listOf(
             Product().also { product ->
@@ -326,7 +321,6 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.tag = "Tag"; // 분류
     @Deprecated
     event.content_id = "Content ID"; // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
-    @SinceVersion("0.4")
     event.products = products
     KakaoAdTracker.getInstance().sendEvent(event);
     ```  
@@ -444,7 +438,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     ```
 
 ~~2. [Billing Service AIDL](https://developer.android.com/google/play/billing/billing_library_overview)을 사용하는 경우~~ 
-* 인앱 구매 요청 후, `onActivityResult()`에서 `KakaoAdTracker.sendInAppBillingResult()` 호출
+* ~~인앱 구매 요청 후, `onActivityResult()`에서 `KakaoAdTracker.sendInAppBillingResult()` 호출~~
 * Kotlin
     ```kotlin
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

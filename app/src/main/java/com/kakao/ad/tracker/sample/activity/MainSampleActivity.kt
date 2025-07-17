@@ -8,14 +8,17 @@ import com.kakao.ad.tracker.KakaoAdTracker
 import com.kakao.ad.tracker.sample.R
 import com.kakao.ad.tracker.sample.util.logAndToast
 import com.kakao.ad.tracker.send
-import kotlinx.android.synthetic.main.activity_main_sample.*
+import com.kakao.ad.tracker.sample.databinding.ActivityMainSampleBinding
 import java.util.Currency
 import java.util.Locale
 
 class MainSampleActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainSampleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivityMainSampleBinding.inflate(layoutInflater)
 
         if (!KakaoAdTracker.isInitialized) {
             KakaoAdTracker.init(this, getString(R.string.kakao_ad_track_id))
@@ -26,28 +29,26 @@ class MainSampleActivity : AppCompatActivity() {
                     "KakaoAdTracker.version = ${KakaoAdTracker.VERSION}"
         )
 
-        setContentView(R.layout.activity_main_sample)
+        setContentView(binding.root)
 
-        sendCompleteRegistrationEventButton.setOnClickListener { sendCompleteRegistrationEvent() }
-        sendSearchEventButton.setOnClickListener { sendSearchEvent() }
-        sendViewContentEventButton.setOnClickListener { sendViewContentEvent() }
-        sendViewCartEventButton.setOnClickListener { sendViewCartEvent() }
-        sendAddToCartEventButton.setOnClickListener { sendAddToCartEvent() }
-        sendAddToWishListEventButton.setOnClickListener { sendAddToWishListEvent() }
-        sendPurchaseEventButton.setOnClickListener { sendPurchaseEvent() }
-        sendInAppPurchaseEventButton.setOnClickListener { sendInAppPurchaseEvent() }
-        sendParticipationEventButton.setOnClickListener { sendParticipationEvent() }
-        sendSignUpEventButton.setOnClickListener { sendSignUpEvent() }
-        startInAppBillingLibTestButton.setOnClickListener {
+        binding.sendCompleteRegistrationEventButton.setOnClickListener { sendCompleteRegistrationEvent() }
+        binding.sendSearchEventButton.setOnClickListener { sendSearchEvent() }
+        binding.sendViewContentEventButton.setOnClickListener { sendNewViewContentEvent() }
+        binding.sendViewCartEventButton.setOnClickListener { sendViewCartEvent() }
+        binding.sendAddToCartEventButton.setOnClickListener { sendNewAddToCartEvent() }
+        binding.sendAddToWishListEventButton.setOnClickListener { sendNewAddToWishListEvent() }
+        binding.sendPurchaseEventButton.setOnClickListener { sendPurchaseEvent() }
+        binding.sendInAppPurchaseEventButton.setOnClickListener { sendInAppPurchaseEvent() }
+        binding.sendParticipationEventButton.setOnClickListener { sendParticipationEvent() }
+        binding.sendSignUpEventButton.setOnClickListener { sendSignUpEvent() }
+        binding.startInAppBillingLibTestButton.setOnClickListener {
             startActivity(Intent(it.context, BillingLibTestActivity::class.java))
         }
-        startInAppBillingAidlTestButton.setOnClickListener {
-            startActivity(Intent(it.context, BillingAidlTestActivity::class.java))
-        }
-        sendLoginEventButton.setOnClickListener { sendLoginEvent() }
-        sendPreparationEventButton.setOnClickListener { sendPreparationEvent() }
-        sendTutorialEventButton.setOnClickListener { sendTutorialEvent() }
-        sendMissionCompleteEventButton.setOnClickListener { sendMissionCompleteEvent() }
+
+        binding.sendLoginEventButton.setOnClickListener { sendLoginEvent() }
+        binding.sendPreparationEventButton.setOnClickListener { sendPreparationEvent() }
+        binding.sendTutorialEventButton.setOnClickListener { sendTutorialEvent() }
+        binding.sendMissionCompleteEventButton.setOnClickListener { sendMissionCompleteEvent() }
     }
 
     /**
@@ -71,13 +72,39 @@ class MainSampleActivity : AppCompatActivity() {
 
     /**
      * 콘텐츠/상품 조회 이벤트(ViewContent)를 전송합니다.
+     * @deprecated - 'Use sendNewViewContentEvent() instead'
      */
     fun sendViewContentEvent() {
         val event = ViewContent()
         event.tag = "Tag" // 분류
-        event.content_id = "Content ID" // 상품 코드
+        event.content_id = "V-Content ID" // 상품 코드
         event.send()
+
+        logAndToast("ViewContent = ${event.content_id}")
     }
+
+    fun sendNewViewContentEvent() {
+        val event = ViewContent()
+        event.tag = "Tag" // 분류
+        event.products =
+            listOf(
+                Product().also { product ->
+                    product.id = "V0001" // 상품 ID
+                    product.name = "View Product 1" // 상품명
+                    product.quantity = 1 // 개수
+                    product.price = 1.1 // 금액
+                },
+                Product().also { product ->
+                    product.id = "V0002" // 상품 ID
+                    product.name = "View Product 2" // 상품명
+                    product.quantity = 2 // 개수
+                    product.price = 2.2 // 금액
+                }
+            )
+        event.send()
+        logAndToast("ViewContent = ${event.products?.map { it.id }.toString()}")
+    }
+
 
     /**
      * 장바구니 보기 이벤트(ViewCart)를 전송합니다.
@@ -90,22 +117,82 @@ class MainSampleActivity : AppCompatActivity() {
 
     /**
      * 장바구니 추가 이벤트(장바구니추가))를 전송합니다.
+     * @deprecated - 'Use sendNewAddToCartEvent() instead'
      */
     fun sendAddToCartEvent() {
         val event = AddToCart()
         event.tag = "Tag" // 분류
-        event.content_id = "Content ID" // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
+        event.content_id = "C-Content ID" // 상품 코드
         event.send()
+        logAndToast("AddToCart = ${event.content_id}")
+    }
+
+    /**
+     * 장바구니 추가 이벤트(장바구니추가))를 전송합니다.
+     */
+    fun sendNewAddToCartEvent() {
+        val event = AddToCart()
+        event.tag = "Tag" // 분류
+        event.products =
+            listOf(
+                Product().also { product ->
+                    product.id = "C0001" // 상품 ID
+                    product.name = "Cart Product 1" // 상품명
+                    product.quantity = 1 // 개수
+                    product.price = 2.1 // 금액
+                },
+                Product().also { product ->
+                    product.id = "C0002" // 상품 ID
+                    product.name = "Cart Product 2" // 상품명
+                    product.quantity = 2 // 개수
+                    product.price = 3.2 // 금액
+                }
+            )
+        event.send()
+        logAndToast("AddToCart = ${event.products?.map { it.id }.toString()}")
+    }
+
+    /**
+     * 관심상품 추가 이벤트(AddToWishlist)를 전송합니다.
+     * @deprecated - 'Use sendNewAddToWishListEvent() instead'
+     */
+    fun sendAddToWishListEvent() {
+        val event = AddToWishList()
+        event.tag = "Tag" // 분류
+        event.content_id = "W-Content ID" // 상품 코드
+        event.send()
+        logAndToast("AddToWishList = ${event.content_id}")
     }
 
     /**
      * 관심상품 추가 이벤트(AddToWishlist)를 전송합니다.
      */
-    fun sendAddToWishListEvent() {
+    fun sendNewAddToWishListEvent() {
         val event = AddToWishList()
         event.tag = "Tag" // 분류
-        event.content_id = "Content ID" // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
+        event.products =
+            listOf(
+                Product().also { product ->
+                    product.id = "W0001" // 상품 ID
+                    product.name = "Wish Product 1" // 상품명
+                    product.quantity = 1 // 개수
+                    product.price = 3.1 // 금액
+                },
+                Product().also { product ->
+                    product.id = "W0002" // 상품 ID
+                    product.name = "Wart Product 2" // 상품명
+                    product.quantity = 2 // 개수
+                    product.price = 4.2 // 금액
+                },
+                Product().also { product ->
+                    product.id = "W0003" // 상품 ID
+                    product.name = "Wart Product 3" // 상품명
+                    product.quantity = 1 // 개수
+                    product.price = 2.2 // 금액
+                }
+            )
         event.send()
+        logAndToast("AddToWishList = ${event.products?.map { it.id }.toString()}")
     }
 
     /**

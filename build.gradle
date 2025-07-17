@@ -2,20 +2,20 @@ buildscript {
     ext.kakaoad_tracker_version = '0.3.11' // 최신 버전 사용을 권장합니다.
 
     // required :: KakaoAd SDK 사용을 위해서는 필수로 필요한 라이브러리 버전 정보
-    ext.kotlin_version = '1.6.21'
-    ext.play_service_version = '16.0.0'
+    ext.kotlin_version = '1.8.22'
+    ext.play_service_version = '17.0.0'
     ext.install_referrer_version = '1.1.1'
 
     // optional : 구매 수집이 필요할 경우 필수로 필요한 라이브러리 버전 정보
-    ext.billing_version = '1.2.2'
+    ext.billing_version = '6.0.1'
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'com.android.tools.build:gradle:8.10.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -23,7 +23,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
     }
 }
