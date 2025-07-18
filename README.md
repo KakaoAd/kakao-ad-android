@@ -85,24 +85,24 @@ Kakao AD SDK를 초기화 하기 위한 정보를 설정하는 방법은 다음�
 Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
 앱 설치 이벤트(AppInstall)와 실행 이벤트(AppLaunch)는 `KakaoAdTracker`를 초기화하는 시점에 자동적으로 수집됩니다.
 
-| 이벤트     | 클래스 | 자동 수집 유무 | 프로퍼티                                                                                                                                                                           | 비고                                        | 
-|---------|---|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
-| 앱 설치    | AppInstall | O       | tag : 분류                                                                                                                                                                       |                                                          |
-| 앱 실행    | AppLaunch | O       | tag : 분류                                                                                                                                                                       |                                                          |
-| 회원가입    | CompleteRegistration  | X       | tag : 분류                                                                                                                                                                       |                                                          |
-| 검색      | Search | X       | tag : 분류 <br>search_string : 검색 문자열                                                                                                                                            |                                                          |
-| 콘텐츠/상품 조회 | ViewContent | X       | tag : 분류 <br><span style="color:green"> ~~content_id : 상품 코드~~ (deprecated) </span> <br><span style="color:#F5F5F5"> currentcy : 통화 코드 </span> <br> <span style="color:#F5F5F5">products : 구매 물품별 정보 </span> | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 가격 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> |
-| 장바구니 추가 | AddToCart | X       | tag : 분류 <br><span style="color:green"> ~~content_id : 상품 코드~~ (deprecated) </span> <br><span style="color:#F5F5F5"> currentcy : 통화 코드 </span> <br> <span style="color:#F5F5F5">products : 구매 물품별 정보 </span> | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 가격 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> |
-| 관심상품 추가 | AddToWishList | X       | tag : 분류 <br><span style="color:green"> ~~content_id : 상품 코드~~ (deprecated) </span> <br><span style="color:#F5F5F5"> currentcy : 통화 코드 </span> <br> <span style="color:#F5F5F5">products : 구매 물품별 정보 </span> | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 가격 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> |
-| 장바구니 보기 | ViewCart | X       | tag : 분류                                                                                                                                                                       |                                                          |
-| 구매      | Purchase | X       | tag : 분류 <br> total_quantity : 총 주문 수량 <br>total_price : 총 주문 금액 <br>currency : 통화 코드 <br>products : 구매 물품별 정보                                                                 | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 가격 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span>                                                         | 
-| 인앱 구매   | InAppPurchase | X       | tag : 분류 <br> total_quantity : 총 주문 수량 <br>total_price : 총 주문 금액 <br>currency : 통화 코드 <br>products : 구매 물품별 정보                                                                 |                                                          |
-| 잠재고객    | Participation | X       | tag : 분류                                                                                                                                                                       |                                                          |
-| 서비스신청   | SignUp | X       | tag : 분류                                                                                                                                                                       |                                                          |
-| 로그인     | Login | x       | tag : 분류                                                                                                                                                                       |                                                          |
-| 사전참여    | Preparation | x       | tag : 분류                                                                                                                                                                       |                                                          |
-| 튜토리얼    | Tutorial | x       | tag : 분류                                                                                                                                                                       |                                                          |
-| 목표달성    | MissionComplete | x       | tag : 분류                                                                                                                                                                       |                                                          |
+| 이벤트     | 클래스 | 자동 수집 유무 | 프로퍼티                                                                                                                                                                                                      | 비고                                                                                                                                            | 
+|---------|---|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| 앱 설치    | AppInstall | O       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
+| 앱 실행    | AppLaunch | O       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
+| 회원가입    | CompleteRegistration  | X       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
+| 검색      | Search | X       | tag : 분류 <br>search_string : 검색 문자열                                                                                                                                                                       |                                                                                                                                               |
+| 콘텐츠/상품 조회 | ViewContent | X       | tag : 분류 <br><span style="color:green"> ~~content_id : 상품 코드~~ (deprecated) </span> <br><span style="color:#F5F5F5"> currency : 통화 코드 (기본값 KRW)</span> <br> <span style="color:#F5F5F5">products : 구매 물품별 정보 </span> | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 단가 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> |
+| 장바구니 추가 | AddToCart | X       | tag : 분류 <br><span style="color:green"> ~~content_id : 상품 코드~~ (deprecated) </span> <br><span style="color:#F5F5F5"> currency : 통화 코드 (기본값 KRW)</span> <br> <span style="color:#F5F5F5">products : 구매 물품별 정보 </span> | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 단가 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> |
+| 관심상품 추가 | AddToWishList | X       | tag : 분류 <br><span style="color:green"> ~~content_id : 상품 코드~~ (deprecated) </span> <br><span style="color:#F5F5F5"> currency : 통화 코드 (기본값 KRW)</span> <br> <span style="color:#F5F5F5">products : 구매 물품별 정보 </span> | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 단가 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> |
+| 장바구니 보기 | ViewCart | X       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
+| 구매      | Purchase | X       | tag : 분류 <br> total_quantity : 총 주문 수량 <br>total_price : 총 주문 금액 <br>currency : 통화 코드<br>products : 구매 물품별 정보                                                                                  | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 단가 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> | 
+| 인앱 구매   | InAppPurchase | X       | tag : 분류 <br> total_quantity : 총 주문 수량 <br>total_price : 총 주문 금액 <br>currency : 통화 코드<br>products : 구매 물품별 정보                                                                                             |                                                                                                                                               |
+| 잠재고객    | Participation | X       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
+| 서비스신청   | SignUp | X       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
+| 로그인     | Login | x       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
+| 사전참여    | Preparation | x       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
+| 튜토리얼    | Tutorial | x       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
+| 목표달성    | MissionComplete | x       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
 
 ### KakaoAdTracker 초기화 하기
 이벤트를 수집하기 위해서는 `KakaoAdTracker`를 초기화하는 과정이 필요합니다.<br/>
@@ -174,6 +174,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.tag = "Tag" // 분류
     @deprecated
     event.content_id = "Content ID" // 상품 코드
+    event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)
     event.products =
           listOf(
             Product().also { product ->
@@ -216,6 +217,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.tag = "Tag"; // 분류
     @Deprecated
     event.content_id = "Content ID"; // 상품 코드
+    event.currency = Currency.getInstance(Locale.KOREA); // 통화코드(ISO-4217)
     event.products = products
     KakaoAdTracker.getInstance().sendEvent(event);
     ```
@@ -228,6 +230,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.tag = "Tag" // 분류
     @Deprecated
     event.content_id = "Content ID" // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
+    event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)
     event.product =
           listOf(
             Product().also { product ->
@@ -269,6 +272,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.tag = "Tag"; // 분류
     @Deprecated
     event.content_id = "Content ID"; // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
+    event.currency = Currency.getInstance(Locale.KOREA); // 통화코드(ISO-4217)
     event.products = products
     KakaoAdTracker.getInstance().sendEvent(event);
     ```
@@ -281,6 +285,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.tag = "Tag" // 분류
     @Deprecated
     event.content_id = "Content ID" // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
+    event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)
     event.product =
           listOf(
             Product().also { product ->
@@ -321,6 +326,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.tag = "Tag"; // 분류
     @Deprecated
     event.content_id = "Content ID"; // 상품 코드, 상품 코드값이 필수로 포함되어야 합니다.
+    event.currency = Currency.getInstance(Locale.KOREA); // 통화코드(ISO-4217)
     event.products = products
     KakaoAdTracker.getInstance().sendEvent(event);
     ```  

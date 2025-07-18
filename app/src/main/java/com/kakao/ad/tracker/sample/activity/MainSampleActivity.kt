@@ -86,6 +86,7 @@ class MainSampleActivity : AppCompatActivity() {
     fun sendNewViewContentEvent() {
         val event = ViewContent()
         event.tag = "Tag" // 분류
+        event.currency = Currency.getInstance(Locale.KOREA)
         event.products =
             listOf(
                 Product().also { product ->
@@ -133,6 +134,7 @@ class MainSampleActivity : AppCompatActivity() {
     fun sendNewAddToCartEvent() {
         val event = AddToCart()
         event.tag = "Tag" // 분류
+        event.currency = Currency.getInstance(Locale.KOREA)
         event.products =
             listOf(
                 Product().also { product ->
@@ -170,6 +172,7 @@ class MainSampleActivity : AppCompatActivity() {
     fun sendNewAddToWishListEvent() {
         val event = AddToWishList()
         event.tag = "Tag" // 분류
+        event.currency = Currency.getInstance(Locale.KOREA)
         event.products =
             listOf(
                 Product().also { product ->
