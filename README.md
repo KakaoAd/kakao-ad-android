@@ -95,7 +95,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
 | 장바구니 추가 | AddToCart | X       | tag : 분류 <br><span style="color:green"> ~~content_id : 상품 코드~~ (deprecated) </span> <br><span style="color:#F5F5F5"> currency : 통화 코드 (기본값 KRW)</span> <br> <span style="color:#F5F5F5">products : 구매 물품별 정보 </span> | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 단가 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> |
 | 관심상품 추가 | AddToWishList | X       | tag : 분류 <br><span style="color:green"> ~~content_id : 상품 코드~~ (deprecated) </span> <br><span style="color:#F5F5F5"> currency : 통화 코드 (기본값 KRW)</span> <br> <span style="color:#F5F5F5">products : 구매 물품별 정보 </span> | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 단가 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> |
 | 장바구니 보기 | ViewCart | X       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
-| 구매      | Purchase | X       | tag : 분류 <br> total_quantity : 총 주문 수량 <br>total_price : 총 주문 금액 <br>currency : 통화 코드<br>products : 구매 물품별 정보                                                                                  | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 단가 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> | 
+| 구매      | Purchase | X       | tag : 분류 <br> total_quantity : 총 주문 수량 <br>total_price : 총 주문 금액 <br>currency : 통화 코드<br>products : 구매 물품별 정보<br>transaction_id : 거래 ID                                                                                  | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 단가 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> | 
 | 인앱 구매   | InAppPurchase | X       | tag : 분류 <br> total_quantity : 총 주문 수량 <br>total_price : 총 주문 금액 <br>currency : 통화 코드<br>products : 구매 물품별 정보                                                                                             |                                                                                                                                               |
 | 잠재고객    | Participation | X       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
 | 서비스신청   | SignUp | X       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
@@ -373,6 +373,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)
     event.total_quantity = event.products?.sumBy { it.quantity } // 총 개수
     event.total_price = event.products?.sumByDouble { it.price } // 총 금액
+    event.transaction_id = "ORDER-001" // 거래 ID (주문번호 등)
     event.send()
     ```
 
@@ -406,6 +407,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     event.currency = Currency.getInstance(Locale.KOREA); // 통화코드(ISO-4217)
     event.total_quantity = totalQuantity; // 총 개수
     event.total_price = totalPrice; // 총 금액
+    event.transaction_id = "ORDER-001"; // 거래 ID (주문번호 등)
     KakaoAdTracker.getInstance().sendEvent(event);
     ```
 

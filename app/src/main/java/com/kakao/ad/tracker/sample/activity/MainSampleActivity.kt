@@ -222,6 +222,7 @@ class MainSampleActivity : AppCompatActivity() {
         event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)
         event.total_quantity = event.products?.sumOf { it.quantity } // 총 개수
         event.total_price = event.products?.sumOf { it.price } // 총 금액
+        event.transaction_id = "ORDER-20260416-001" // 거래 ID (주문번호 등)
         event.send()
     }
 
