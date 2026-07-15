@@ -94,12 +94,14 @@ class MainSampleActivity : AppCompatActivity() {
                     product.name = "View Product 1" // 상품명
                     product.quantity = 1 // 개수
                     product.price = 1.1 // 금액
+                    product.brand_id = "BRAND001" // 브랜드 ID
                 },
                 Product().also { product ->
                     product.id = "V0002" // 상품 ID
                     product.name = "View Product 2" // 상품명
                     product.quantity = 2 // 개수
                     product.price = 2.2 // 금액
+                    product.brand_id = "BRAND001" // 브랜드 ID
                 }
             )
         event.send()
@@ -142,12 +144,14 @@ class MainSampleActivity : AppCompatActivity() {
                     product.name = "Cart Product 1" // 상품명
                     product.quantity = 1 // 개수
                     product.price = 2.1 // 금액
+                    product.brand_id = "BRAND001" // 브랜드 ID
                 },
                 Product().also { product ->
                     product.id = "C0002" // 상품 ID
                     product.name = "Cart Product 2" // 상품명
                     product.quantity = 2 // 개수
                     product.price = 3.2 // 금액
+                    product.brand_id = "BRAND001" // 브랜드 ID
                 }
             )
         event.send()
@@ -180,18 +184,21 @@ class MainSampleActivity : AppCompatActivity() {
                     product.name = "Wish Product 1" // 상품명
                     product.quantity = 1 // 개수
                     product.price = 3.1 // 금액
+                    product.brand_id = "BRAND001" // 브랜드 ID
                 },
                 Product().also { product ->
                     product.id = "W0002" // 상품 ID
                     product.name = "Wart Product 2" // 상품명
                     product.quantity = 2 // 개수
                     product.price = 4.2 // 금액
+                    product.brand_id = "BRAND001" // 브랜드 ID
                 },
                 Product().also { product ->
                     product.id = "W0003" // 상품 ID
                     product.name = "Wart Product 3" // 상품명
                     product.quantity = 1 // 개수
                     product.price = 2.2 // 금액
+                    product.brand_id = "BRAND001" // 브랜드 ID
                 }
             )
         event.send()
@@ -211,12 +218,14 @@ class MainSampleActivity : AppCompatActivity() {
                     product.name = "Product 1" // 상품명
                     product.quantity = 1 // 개수
                     product.price = 1.1 // 금액
+                    product.brand_id = "BRAND001" // 브랜드 ID
                 },
                 Product().also { product ->
                     product.id = "P0002" // 상품 ID
                     product.name = "Product 2" // 상품명
                     product.quantity = 2 // 개수
                     product.price = 2.2 // 금액
+                    product.brand_id = "BRAND001" // 브랜드 ID
                 }
             )
         event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)
@@ -239,12 +248,14 @@ class MainSampleActivity : AppCompatActivity() {
                     product.name = "Product 1" // 상품명
                     product.quantity = 1 // 개수
                     product.price = 1.1 // 금액
+                    product.brand_id = "BRAND001" // 브랜드 ID
                 },
                 Product().also { product ->
                     product.id = "P0002" // 상품 ID
                     product.name = "Product 2" // 상품명
                     product.quantity = 2 // 개수
                     product.price = 2.2 // 금액
+                    product.brand_id = "BRAND001" // 브랜드 ID
                 }
             )
         event.currency = Currency.getInstance(Locale.KOREA) // 통화코드(ISO-4217)

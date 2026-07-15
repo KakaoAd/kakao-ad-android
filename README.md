@@ -91,11 +91,11 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
 | 앱 실행    | AppLaunch | O       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
 | 회원가입    | CompleteRegistration  | X       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
 | 검색      | Search | X       | tag : 분류 <br>search_string : 검색 문자열                                                                                                                                                                       |                                                                                                                                               |
-| 콘텐츠/상품 조회 | ViewContent | X       | tag : 분류 <br><span style="color:green"> ~~content_id : 상품 코드~~ (deprecated) </span> <br><span style="color:#F5F5F5"> currency : 통화 코드 (기본값 KRW)</span> <br> <span style="color:#F5F5F5">products : 구매 물품별 정보 </span> | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 단가 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> |
-| 장바구니 추가 | AddToCart | X       | tag : 분류 <br><span style="color:green"> ~~content_id : 상품 코드~~ (deprecated) </span> <br><span style="color:#F5F5F5"> currency : 통화 코드 (기본값 KRW)</span> <br> <span style="color:#F5F5F5">products : 구매 물품별 정보 </span> | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 단가 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> |
-| 관심상품 추가 | AddToWishList | X       | tag : 분류 <br><span style="color:green"> ~~content_id : 상품 코드~~ (deprecated) </span> <br><span style="color:#F5F5F5"> currency : 통화 코드 (기본값 KRW)</span> <br> <span style="color:#F5F5F5">products : 구매 물품별 정보 </span> | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 단가 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> |
+| 콘텐츠/상품 조회 | ViewContent | X       | tag : 분류 <br><span style="color:green"> ~~content_id : 상품 코드~~ (deprecated) </span> <br><span style="color:#F5F5F5"> currency : 통화 코드 (기본값 KRW)</span> <br> <span style="color:#F5F5F5">products : 구매 물품별 정보 </span> | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 단가 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> <br> <span style="color:#F5F5F5"> brand_id: 브랜드 ID </span> |
+| 장바구니 추가 | AddToCart | X       | tag : 분류 <br><span style="color:green"> ~~content_id : 상품 코드~~ (deprecated) </span> <br><span style="color:#F5F5F5"> currency : 통화 코드 (기본값 KRW)</span> <br> <span style="color:#F5F5F5">products : 구매 물품별 정보 </span> | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 단가 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> <br> <span style="color:#F5F5F5"> brand_id: 브랜드 ID </span> |
+| 관심상품 추가 | AddToWishList | X       | tag : 분류 <br><span style="color:green"> ~~content_id : 상품 코드~~ (deprecated) </span> <br><span style="color:#F5F5F5"> currency : 통화 코드 (기본값 KRW)</span> <br> <span style="color:#F5F5F5">products : 구매 물품별 정보 </span> | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 단가 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> <br> <span style="color:#F5F5F5"> brand_id: 브랜드 ID </span> |
 | 장바구니 보기 | ViewCart | X       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
-| 구매      | Purchase | X       | tag : 분류 <br> total_quantity : 총 주문 수량 <br>total_price : 총 주문 금액 <br>currency : 통화 코드<br>products : 구매 물품별 정보<br>transaction_id : 거래 ID                                                                                  | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 단가 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> | 
+| 구매      | Purchase | X       | tag : 분류 <br> total_quantity : 총 주문 수량 <br>total_price : 총 주문 금액 <br>currency : 통화 코드<br>products : 구매 물품별 정보<br>transaction_id : 거래 ID                                                                                  | Product : 구매 물품별 정보 <br> id : 상품 id <br> name : 상품명 <br>quantity: 상품개수 <br>price: 상품 단가 <br> <span style="color:#F5F5F5"> brand: 브랜드명 </span> <br> <span style="color:#F5F5F5"> brand_id: 브랜드 ID </span> | 
 | 인앱 구매   | InAppPurchase | X       | tag : 분류 <br> total_quantity : 총 주문 수량 <br>total_price : 총 주문 금액 <br>currency : 통화 코드<br>products : 구매 물품별 정보                                                                                             |                                                                                                                                               |
 | 잠재고객    | Participation | X       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
 | 서비스신청   | SignUp | X       | tag : 분류                                                                                                                                                                                                  |                                                                                                                                               |
@@ -182,12 +182,14 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
                 product.name = "CProduct 1" // 상품명
                 product.quantity = 1 // 개수
                 product.brand = "브랜드1" // 브랜드명
+                product.brand_id = "BRAND001" // 브랜드 ID
                 product.price = 1.1 // 금액
             },
             Product().also { product ->
                 product.id = "C0002" // 상품 ID
                 product.name = "CProduct 2" // 상품명
                 product.brand = "브랜드2" // 브랜드명
+                product.brand_id = "BRAND002" // 브랜드 ID
                 product.quantity = 2 // 개수
                 product.price = 2.2 // 금액
             }
@@ -202,6 +204,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     product1.name = "CProduct 1"; // 상품명
     product1.quantity = 1; // 개수
     product1.brand = "브랜드1". // 브랜드명
+    product1.brand_id = "BRAND001"; // 브랜드 ID
     product1.price = 1.1; // 금액
 
     Product product2 = new Product(); // 상품
@@ -209,6 +212,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     product2.name = "Product 2"; // 상품명
     product2.quantity = 2; // 개수
     product1.brand = "브랜드2"  // 브랜드명
+    product2.brand_id = "BRAND002"; // 브랜드 ID
     product2.price = 2.2; // 금액
 
     List<Product> products = Arrays.asList(product1, product2); // 조회 상품 목록
@@ -238,12 +242,14 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
                 product.name = "AProduct 1" // 상품명
                 product.quantity = 1 // 개수
                 product.brand = "브랜드1A" // 브랜드명
+                product.brand_id = "BRAND001" // 브랜드 ID
                 product.price = 1.1 // 금액
             },
             Product().also { product ->
                 product.id = "A0002" // 상품 ID
                 product.name = "AProduct 2" // 상품명
                 product.brand = "브랜드2A" // 브랜드명
+                product.brand_id = "BRAND002" // 브랜드 ID
                 product.quantity = 2 // 개수
                 product.price = 2.2 // 금액
             }     
@@ -257,6 +263,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     product1.name = "AProduct 1"; // 상품명
     product1.quantity = 1; // 개수
     product1.brand = "브랜드1A". // 브랜드명
+    product1.brand_id = "BRAND001"; // 브랜드 ID
     product1.price = 1.1; // 금액
 
     Product product2 = new Product(); // 상품
@@ -264,6 +271,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     product2.name = "AProduct 2"; // 상품명
     product2.quantity = 2; // 개수
     product1.brand = "브랜드2A"  // 브랜드명
+    product2.brand_id = "BRAND002"; // 브랜드 ID
     product2.price = 2.2; // 금액
 
     List<Product> products = Arrays.asList(product1, product2); // 카트 상품 목록
@@ -293,12 +301,14 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
                 product.name = "WProduct 1" // 상품명
                 product.quantity = 1 // 개수
                 product.brand = "브랜드1W" // 브랜드명
+                product.brand_id = "BRAND001" // 브랜드 ID
                 product.price = 1.1 // 금액
             },
             Product().also { product ->
                 product.id = "W0002" // 상품 ID
                 product.name = "WProduct 2" // 상품명
                 product.brand = "브랜드2W" // 브랜드명
+                product.brand_id = "BRAND002" // 브랜드 ID
                 product.quantity = 2 // 개수
                 product.price = 2.2 // 금액
             }       
@@ -312,6 +322,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     product1.name = "WProduct 1"; // 상품명
     product1.quantity = 1; // 개수
     product1.brand = "브랜드1W". // 브랜드명
+    product1.brand_id = "BRAND001"; // 브랜드 ID
     product1.price = 1.1; // 금액
 
     Product product2 = new Product(); // 상품
@@ -319,6 +330,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     product2.name = "WProduct 2"; // 상품명
     product2.quantity = 2; // 개수
     product1.brand = "브랜드2W"  // 브랜드명
+    product2.brand_id = "BRAND002"; // 브랜드 ID
     product2.price = 2.2; // 금액
 
     List<Product> products = Arrays.asList(product1, product2); // 관심 상품 목록  
@@ -360,6 +372,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
                 product.name = "Product 1" // 상품명
                 product.quantity = 1 // 개수
                 product.brand = "브랜드P"
+                product.brand_id = "BRANDP" // 브랜드 ID
                 product.price = 1.1 // 금액
             },
             Product().also { product ->
@@ -367,6 +380,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
                 product.name = "Product 2" // 상품명
                 product.quantity = 2 // 개수
                 product.brand = "브랜드P"
+                product.brand_id = "BRANDP" // 브랜드 ID
                 product.price = 2.2 // 금액
             }
         )
@@ -384,6 +398,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     product1.name = "Product 1"; // 상품명
     product1.quantity = 1; // 개수
     product1.brand = "브랜드P"
+    product1.brand_id = "BRANDP"; // 브랜드 ID
     product1.price = 1.1; // 금액
 
     Product product2 = new Product(); // 상품
@@ -391,6 +406,7 @@ Kakao AD SDK에서는 다음과 같은 이벤트를 제공합니다.<br/>
     product2.name = "Product 2"; // 상품명
     product2.quantity = 2; // 개수
     product2.brand = "브랜드P"
+    product2.brand_id = "BRANDP"; // 브랜드 ID
     product2.price = 2.2; // 금액
 
     List<Product> products = Arrays.asList(product1, product2); // 구매 상품 목록
